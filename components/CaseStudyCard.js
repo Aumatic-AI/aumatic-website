@@ -178,7 +178,19 @@ export default function CaseStudyCard({ study, index }) {
             e.currentTarget.style.borderColor = 'rgba(194,98,45,0.14)'
           }}
         >
-          <WorkflowBanner />
+          {study.image ? (
+            <div style={{ width:'100%', aspectRatio:'16/7', overflow:'hidden', flexShrink:0, background:'#1A0F0A' }}>
+              <img
+                src={study.image}
+                alt={study.title}
+                style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', transition:'transform 0.4s ease' }}
+                onMouseEnter={e => e.currentTarget.style.transform='scale(1.05)'}
+                onMouseLeave={e => e.currentTarget.style.transform='scale(1)'}
+              />
+            </div>
+          ) : (
+            <WorkflowBanner />
+          )}
 
           <div style={{ padding: '20px 22px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
             {/* Category + date */}

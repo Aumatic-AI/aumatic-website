@@ -43,7 +43,7 @@ export default function CaseStudyPage({ study }) {
   if (!study) return <NotFound />
 
   // Interleave workflow images: after section 1 and section 2
-  const imgs = study.images || []
+  const imgs = study.images || (study.image ? [study.image] : [])
   const contentItems = study.sections
     ? study.sections.reduce((acc, section, i) => {
         acc.push({ kind: 'section', data: section, index: i })
