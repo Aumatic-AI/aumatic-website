@@ -1,9 +1,9 @@
-﻿// `metrics` array â†’ used by homepage CaseStudyCard (warm beige listing)
-// `category` + `metricsLabel` + `description` + `sections` â†’ used by detail pages
+// `metrics` array → used by homepage CaseStudyCard (warm beige listing)
+// `category` + `metricsLabel` + `description` + `sections` → used by detail pages
 
 export const caseStudies = [
 
-  /* â”€â”€â”€ 1 â”€â”€â”€ */
+  /* ─── 1 ─── */
   {
     slug:      'ai-video-ad-creative-automation',
     image:     '/AI-PoweredVideoAdCreative System.jpg',
@@ -13,21 +13,21 @@ export const caseStudies = [
     date:      'November 05, 2025',
     tags:      ['AI Video', 'Creative Automation', 'GPT-4o', 'Make.com'],
     gradient:  'linear-gradient(135deg,#6D28D9 0%,#4C1D95 100%)',
-    icon:      'ðŸŽ¥',
-    summary:   'We automated a New York ad-creative agency â€” turning product photos into high-end video ads in hours instead of weeks. No photoshoots. No studios. Just AI-powered creative production at scale.',
+    icon:      '🎥',
+    summary:   'We automated a New York ad-creative agency — turning product photos into high-end video ads in hours instead of weeks. No photoshoots. No studios. Just AI-powered creative production at scale.',
     metrics: [
       { value: 'Hours',  label: 'Not weeks per ad'   },
       { value: '0',      label: 'Studios needed'     },
-      { value: '5Ã—',     label: 'Ad variants/product'},
+      { value: '5×',     label: 'Ad variants/product'},
     ],
-    description:  'We automated a New York ad-creative agency â€” turning product photos into high-end video ads in hours instead of weeks. No photoshoots. No studios. Just AI-powered creative production at scale.',
+    description:  'We automated a New York ad-creative agency — turning product photos into high-end video ads in hours instead of weeks. No photoshoots. No studios. Just AI-powered creative production at scale.',
     category:     'CREATIVE AUTOMATION',
-    metricsLabel: 'NYC AGENCY â€¢ NO PHOTOSHOOTS',
+    metricsLabel: 'NYC AGENCY • NO PHOTOSHOOTS',
     sections: [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'A New York ad-creative agency was spending days scheduling photo shoots, hiring models, and editing multiple ad versions for each product. As client demand grew, budgets tightened and timelines shortened â€” but quality had to stay premium. They needed a way to produce high-end video ads at speed, without the overhead of physical production.',
+        content: 'A New York ad-creative agency was spending days scheduling photo shoots, hiring models, and editing multiple ad versions for each product. As client demand grew, budgets tightened and timelines shortened — but quality had to stay premium. They needed a way to produce high-end video ads at speed, without the overhead of physical production.',
       },
       {
         type:  'solution',
@@ -49,16 +49,16 @@ export const caseStudies = [
           'Full creative direction without production overhead',
           '5 ad variants per product for split testing',
           'Cloud media hub keeps all assets organised',
-          'Hours to finished ads â€” not days or weeks',
+          'Hours to finished ads — not days or weeks',
           'Scales with new clients without new staff',
         ],
-        content: 'This pipeline turned a traditional creative workflow into an AI production engine. The agency now delivers premium video ads faster than competitors who still rely on studios â€” and that speed became a key selling point for new business.',
+        content: 'This pipeline turned a traditional creative workflow into an AI production engine. The agency now delivers premium video ads faster than competitors who still rely on studios — and that speed became a key selling point for new business.',
       },
       {
         type:  'impact',
         title: 'Impact',
         bullets: [
-          'Ad production time reduced from 7â€“10 days to hours',
+          'Ad production time reduced from 7–10 days to hours',
           'Zero photography, studio, or model costs per ad',
           '5 ad variants generated per product for A/B testing',
           'Agency able to take on more clients without growing the production team',
@@ -68,7 +68,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 2 â”€â”€â”€ */
+  /* ─── 2 ─── */
   {
     slug:      'short-video-reels-automation',
     image:     '/ShortVideo(Reels)ContentAutomation.jpg',
@@ -78,14 +78,14 @@ export const caseStudies = [
     date:      'November 10, 2025',
     tags:      ['Reels', 'Short Video', 'n8n', 'Auto-Publishing'],
     gradient:  'linear-gradient(135deg,#3D2314 0%,#C2622D 100%)',
-    icon:      'ðŸ“±',
-    summary:   'A Toronto content brand needed a way to maintain consistent short video presence without manual effort. We built an automation that generates and publishes video content every 2 days â€” with a manual override option for custom stories.',
+    icon:      '📱',
+    summary:   'A Toronto content brand needed a way to maintain consistent short video presence without manual effort. We built an automation that generates and publishes video content every 2 days — with a manual override option for custom stories.',
     metrics: [
       { value: 'Every 2d', label: 'Auto-published Reel' },
       { value: '0',        label: 'Manual steps'        },
       { value: 'Custom',   label: 'Topic trigger option' },
     ],
-    description:  'A Toronto content brand needed a way to maintain consistent short video presence without manual effort. We built an automation that generates and publishes video content every 2 days â€” with a manual override option for custom stories.',
+    description:  'A Toronto content brand needed a way to maintain consistent short video presence without manual effort. We built an automation that generates and publishes video content every 2 days — with a manual override option for custom stories.',
     category:     'SOCIAL VIDEO AUTOMATION',
     metricsLabel: 'AUTO-PUBLISHED EVERY 2 DAYS',
     sections: [
@@ -99,10 +99,10 @@ export const caseStudies = [
         title: 'Solution',
         bullets: [
           'Automated Content Production: Every 2 days, the system auto-generates a short video based on trending hooks, relevant keywords, and evergreen content themes tied to the client\'s niche.',
-          'Custom Trigger: The client can manually input a topic or story idea at any time â€” and the system will prioritize and generate a short video on demand.',
+          'Custom Trigger: The client can manually input a topic or story idea at any time — and the system will prioritize and generate a short video on demand.',
           'Multi-Platform Publishing: The automation posts the video directly to Instagram Reels, TikTok, YouTube Shorts, Facebook Short Video, and LinkedIn.',
           'Consistent Visual Identity: Each video features brand guidelines (fonts, colors, logo), auto-captioning, and engaging hooks to maximize retention.',
-          'Smart Scheduling: Two publishing modes â€” automated cadence (every 2 days) and manual immediate publish â€” both with optimized time slots for peak engagement.',
+          'Smart Scheduling: Two publishing modes — automated cadence (every 2 days) and manual immediate publish — both with optimized time slots for peak engagement.',
           'Cloud Library & Tracking: All generated videos are saved to a cloud drive with metadata (topic, keywords, publish date) for easy reuse, analytics, or A/B testing.',
         ],
       },
@@ -126,14 +126,14 @@ export const caseStudies = [
           'Auto-publishes short videos every 2 days without human intervention',
           'Manual topic override gives creative flexibility',
           'Consistent audience engagement and growth',
-          'Saved 8â€“15+ hours per week on video production',
+          'Saved 8–15+ hours per week on video production',
           'Brand presence on Reels, TikTok, Shorts, and more',
         ],
       },
     ],
   },
 
-  /* â”€â”€â”€ 3 â”€â”€â”€ */
+  /* ─── 3 ─── */
   {
     slug:      'seo-blog-automation',
     image:     '/AI-DrivenSEOContentAutomation.jpg',
@@ -143,21 +143,21 @@ export const caseStudies = [
     date:      'November 06, 2025',
     tags:      ['SEO', 'Blog Automation', 'WordPress', 'Perplexity', 'SEMrush'],
     gradient:  'linear-gradient(135deg,#8A6A5A 0%,#3D2314 100%)',
-    icon:      'âœï¸',
-    summary:   'A Canada-based business needed a way to rank faster, publish more content, and dominate high-intent search keywords â€” without hiring writers or SEO experts. We automated their entire SEO content pipeline end-to-end.',
+    icon:      '✏️',
+    summary:   'A Canada-based business needed a way to rank faster, publish more content, and dominate high-intent search keywords — without hiring writers or SEO experts. We automated their entire SEO content pipeline end-to-end.',
     metrics: [
       { value: 'Auto',   label: 'Keyword research'    },
       { value: 'Daily',  label: 'Blog publishing'     },
       { value: '100%',   label: 'Hands-free pipeline' },
     ],
-    description:  'A Canada-based business needed a way to rank faster, publish more content, and dominate high-intent search keywords â€” without hiring writers or SEO experts. We automated their entire SEO content pipeline end-to-end.',
+    description:  'A Canada-based business needed a way to rank faster, publish more content, and dominate high-intent search keywords — without hiring writers or SEO experts. We automated their entire SEO content pipeline end-to-end.',
     category:     'SEO CONTENT AUTOMATION',
-    metricsLabel: '1-CLICK PUBLISHING â€¢ FULLY OPTIMIZED',
+    metricsLabel: '1-CLICK PUBLISHING • FULLY OPTIMIZED',
     sections: [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'The client operated in a competitive niche in Canada and struggled to publish consistent, high-quality SEO content. Hiring writers was expensive, keyword research was slow, and posts often lacked SEO structure or optimization. They needed a scalable way to publish search-optimized blogs with correct keywords, images, and metadata â€” without manual work or paying for large content teams.',
+        content: 'The client operated in a competitive niche in Canada and struggled to publish consistent, high-quality SEO content. Hiring writers was expensive, keyword research was slow, and posts often lacked SEO structure or optimization. They needed a scalable way to publish search-optimized blogs with correct keywords, images, and metadata — without manual work or paying for large content teams.',
       },
       {
         type:  'solution',
@@ -183,14 +183,14 @@ export const caseStudies = [
           'Consistent content cadence for ranking',
           'Massive cost savings vs hiring writers',
         ],
-        content: 'Once we set up the pipeline, the client only inputs their topic or product name. The system researches the niche, finds keywords worth ranking for, writes a polished SEO blog, generates a branded image, inserts keywords + meta data, and publishes directly to their WordPress site â€” all automatically.',
+        content: 'Once we set up the pipeline, the client only inputs their topic or product name. The system researches the niche, finds keywords worth ranking for, writes a polished SEO blog, generates a branded image, inserts keywords + meta data, and publishes directly to their WordPress site — all automatically.',
       },
       {
         type:  'impact',
         title: 'Impact',
         bullets: [
-          'Content output increased from ~4 blogs/month to 15â€“20 blogs/month',
-          'Improved keyword coverage and organic visibility over 3â€“4 months',
+          'Content output increased from ~4 blogs/month to 15–20 blogs/month',
+          'Improved keyword coverage and organic visibility over 3–4 months',
           'Consistent organic traffic growth without paid ads',
           'No longer dependent on freelance writers or external SEO agencies',
           'Meaningful time and cost savings on content production each month',
@@ -199,7 +199,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 4 â”€â”€â”€ */
+  /* ─── 4 ─── */
   {
     slug:      'instagram-dm-comments-automation',
     image:     '/InstagramDM&CommentsAutomation1.png',
@@ -209,22 +209,22 @@ export const caseStudies = [
     date:      'October 04, 2025',
     tags:      ['Instagram', 'DM Automation', 'n8n', 'AI Agent', 'Meta Graph API'],
     gradient:  'linear-gradient(135deg,#C2622D 0%,#E8A060 100%)',
-    icon:      'ðŸ’¬',
+    icon:      '💬',
     images:    ['/InstagramDM&CommentsAutomation1.png', '/InstagramDM%26CommentsAutomation2%20(2).png'],
-    summary:   'Brands needed faster, on-brand Instagram conversations. We delivered an AI agent that replies in comments, moves to DM, and converts interest into salesâ€”compliantly and at scale.',
+    summary:   'Brands needed faster, on-brand Instagram conversations. We delivered an AI agent that replies in comments, moves to DM, and converts interest into sales — compliantly and at scale.',
     metrics: [
       { value: '+62%', label: 'More replies'          },
       { value: '24/7', label: 'Sales chat coverage'   },
       { value: 'Auto', label: 'Lead capture'          },
     ],
-    description:  'Brands needed faster, on-brand Instagram conversations. We delivered an AI agent that replies in comments, moves to DM, and converts interest into salesâ€”compliantly and at scale.',
+    description:  'Brands needed faster, on-brand Instagram conversations. We delivered an AI agent that replies in comments, moves to DM, and converts interest into sales — compliantly and at scale.',
     category:     'SOCIAL COMMERCE SOLUTION',
     metricsLabel: '62% MORE REPLIES FROM COMMENTS',
     sections: [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'High comment and DM volume led to slow replies, inconsistent tone, and missed sales windowsâ€”especially nights and weekends. FAQs (pricing, sizes, delivery, order status) drained team time and reduced conversion.',
+        content: 'High comment and DM volume led to slow replies, inconsistent tone, and missed sales windows — especially nights and weekends. FAQs (pricing, sizes, delivery, order status) drained team time and reduced conversion.',
       },
       {
         type:  'solution',
@@ -245,13 +245,13 @@ export const caseStudies = [
           'Auto follow-up & reminders',
           'CRM/Sheet logging & UTM tracking',
         ],
-        content: 'Operators see live threads, confidence scores, and templates. Marketing can pause/approve flows per campaign and track conversions from comment â†’ DM â†’ checkout.',
+        content: 'Operators see live threads, confidence scores, and templates. Marketing can pause/approve flows per campaign and track conversions from comment → DM → checkout.',
       },
       {
         type:  'impact',
         title: 'Impact',
         bullets: [
-          'Noticeably more replies initiated from comments â€” faster and more consistent',
+          'Noticeably more replies initiated from comments — faster and more consistent',
           'More qualified leads captured through automated DM conversations',
           'Faster resolution time for common questions and inquiries',
           '24/7 coverage with consistent brand voice',
@@ -261,7 +261,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 5 â”€â”€â”€ */
+  /* ─── 5 ─── */
   {
     slug:      'linkedin-post-generator-auto-posting',
     image:     '/LinkedInPostGeneratorforB2BGrowth1.png',
@@ -271,15 +271,15 @@ export const caseStudies = [
     date:      'October 04, 2025',
     tags:      ['LinkedIn', 'B2B', 'Auto-Posting', 'Lead Generation'],
     gradient:  'linear-gradient(135deg,#1e3a5f 0%,#2d6a9f 100%)',
-    icon:      'ðŸ’¼',
+    icon:      '💼',
     images:    ['/LinkedInPostGeneratorforB2BGrowth1.png', '/LinkedInPostGeneratorforB2BGrowth2.png'],
-    summary:   'We built an AI system that analyzes top public posts in your niche, rewrites them in your tone with fresh angles, designs an image, and auto-posts to LinkedIn â€” keeping you consistently visible to prospects and winning new clients.',
+    summary:   'We built an AI system that analyzes top public posts in your niche, rewrites them in your tone with fresh angles, designs an image, and auto-posts to LinkedIn — keeping you consistently visible to prospects and winning new clients.',
     metrics: [
       { value: 'Daily',  label: 'Auto-posts'           },
       { value: '0',      label: 'Manual effort'        },
       { value: 'Inbound', label: 'Lead channel created'},
     ],
-    description:  'We built an AI system that analyzes top public posts in your niche, rewrites them in your tone with fresh angles, designs an image, and auto-posts to LinkedIn â€” keeping you consistently visible to prospects and winning new clients.',
+    description:  'We built an AI system that analyzes top public posts in your niche, rewrites them in your tone with fresh angles, designs an image, and auto-posts to LinkedIn — keeping you consistently visible to prospects and winning new clients.',
     category:     'B2B CONTENT SOLUTION',
     metricsLabel: 'BOOST IN INBOUND LEADS',
     sections: [
@@ -293,12 +293,12 @@ export const caseStudies = [
         title: 'Solution',
         bullets: [
           'Discovery: AI scans top-performing public posts in your niche daily and extracts winning angles, hooks, and formats that are already proven to engage your target audience.',
-          'Suitability Check: Each idea is scored against your audience profile, tone guidelines, and content policy â€” only the best fits advance to the writing stage.',
+          'Suitability Check: Each idea is scored against your audience profile, tone guidelines, and content policy — only the best fits advance to the writing stage.',
           'Generation: AI rewrites the approved idea with a fresh angle in your brand voice, producing an original post that never reads like a copy-paste.',
-          'Visuals: On-brand images are automatically designed for each post using your brand kit â€” colours, fonts, and logo â€” with no manual design work.',
+          'Visuals: On-brand images are automatically designed for each post using your brand kit — colours, fonts, and logo — with no manual design work.',
           'Scheduling: Posts are queued for your optimal posting time and published hands-free on a set cadence (e.g., 1 post/day at 9:30 AM).',
           'Lead Capture: CTAs, link tracking, and profile-visit attribution surface engaged prospects and route warm signals to your pipeline automatically.',
-          'Learning Loop: Engagement data â€” likes, comments, reposts â€” feeds back into the system to improve future post selection and tone calibration over time.',
+          'Learning Loop: Engagement data — likes, comments, reposts — feeds back into the system to improve future post selection and tone calibration over time.',
         ],
       },
       {
@@ -307,7 +307,7 @@ export const caseStudies = [
         bullets: [
           'Finds proven ideas in your niche',
           'Brand voice & policy guardrails',
-          'Fresh angles â€” no copy-paste',
+          'Fresh angles — no copy-paste',
           'Auto images with your brand kit',
           'Hands-free daily scheduling',
           'Lead-focused CTAs & tracking',
@@ -319,16 +319,16 @@ export const caseStudies = [
         title: 'Impact',
         bullets: [
           'Consistent daily posting on LinkedIn without any manual effort',
-          '8â€“10 hours per week saved on content planning, writing, and scheduling',
+          '8–10 hours per week saved on content planning, writing, and scheduling',
           'Increase in qualified inbound leads from higher profile visibility and engagement',
-          'On-brand, policy-compliant posts every day â€” no tone drift or approval delays',
-          'Evergreen content queue kept 2â€“3 weeks ahead at all times',
+          'On-brand, policy-compliant posts every day — no tone drift or approval delays',
+          'Evergreen content queue kept 2–3 weeks ahead at all times',
         ],
       },
     ],
   },
 
-  /* â”€â”€â”€ 6 â”€â”€â”€ */
+  /* ─── 6 ─── */
   {
     slug:      'newsletter-spam-monitoring-lead-gen',
     image:     '/NewsletterAutomationforAgencyLeadGeneration.png',
@@ -338,7 +338,7 @@ export const caseStudies = [
     date:      'October 05, 2025',
     tags:      ['Email', 'Spam Monitoring', 'Lead Generation', 'Outreach'],
     gradient:  'linear-gradient(135deg,#4A2C6A 0%,#7B4FA6 100%)',
-    icon:      'ðŸ“§',
+    icon:      '📧',
     images:    ['/NewsletterAutomationforAgencyLeadGeneration.png'],
     summary:   'A marketing agency needed a steady stream of qualified leads. We built an automation that subscribes to niche newsletters across managed inboxes, detects senders landing in spam or failing verification, and launches contextual outreach to offer deliverability & email marketing services.',
     metrics: [
@@ -353,7 +353,7 @@ export const caseStudies = [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'The agency relied on cold lists with low intent. Many potential clients were already signaling deliverability issuesâ€”double-opt-in loops, missing confirmation emails, or messages routed to spamâ€”but these signals were scattered across inboxes and never actioned at scale.',
+        content: 'The agency relied on cold lists with low intent. Many potential clients were already signaling deliverability issues — double-opt-in loops, missing confirmation emails, or messages routed to spam — but these signals were scattered across inboxes and never actioned at scale.',
       },
       {
         type:  'solution',
@@ -363,7 +363,7 @@ export const caseStudies = [
           'Signal Detection: Monitor inbox events (INBOX/SPAM/Promotions), double-opt-in requests, bounces, and sender authentication hints.',
           'Classification: Tag each sender by risk (spam-routed, missing DKIM/SPF, slow confirmation), intent, and niche fit.',
           'Outreach Trigger: When a sender trips a deliverability issue, fire a tailored outreach sequence offering remediation and email marketing help.',
-          'CRM Sync: De-duplicate domains, enrich contacts, and track outcomes from first touch â†’ booked call.',
+          'CRM Sync: De-duplicate domains, enrich contacts, and track outcomes from first touch → booked call.',
           'Compliance: Respect unsubscribes, frequency caps, and lawful bases for contact; store audit logs.',
         ],
       },
@@ -378,7 +378,7 @@ export const caseStudies = [
           'De-dup + enrichment for clean CRM',
           'Privacy-first and compliant',
         ],
-        content: 'Operators see a dashboard of newsletter domains with status (OK/Spam/No-Mail/Double-Opt-In), niche tags, and last events. One click reveals suggested outreach copy and a remediation checklist; wins feed a case-study queue automatically.',
+        content: 'Operators see a dashboard of newsletter domains with status (OK / Spam / No-Mail / Double-Opt-In), niche tags, and last events. One click reveals suggested outreach copy and a remediation checklist; wins feed a case-study queue automatically.',
       },
       {
         type:  'impact',
@@ -387,14 +387,14 @@ export const caseStudies = [
           'Steady stream of high-intent leads from real deliverability issues',
           'Reduced time spent hunting prospects; focus shifts to consults',
           'Cleaner CRM with de-duped domains and tracked outcomes',
-          'Faster cycles from signal â†’ outreach â†’ booked calls',
+          'Faster cycles from signal → outreach → booked calls',
           'Reusable playbook for new niches and geographies',
         ],
       },
     ],
   },
 
-  /* â”€â”€â”€ 7 â”€â”€â”€ */
+  /* ─── 7 ─── */
   {
     slug:      'whatsapp-broadcast-book-launches',
     image:     '/WhatsAppBroadcastAutomationforPublishers1.png',
@@ -404,15 +404,15 @@ export const caseStudies = [
     date:      'October 05, 2025',
     tags:      ['WhatsApp', 'Broadcast', 'Publishing', 'Launch Automation'],
     gradient:  'linear-gradient(135deg,#1a5c3a 0%,#2d9e65 100%)',
-    icon:      'ðŸ“š',
+    icon:      '📚',
     images:    ['/WhatsAppBroadcastAutomationforPublishers1.png', '/WhatsAppBroadcastAutomationforPublishers2.png'],
-    summary:   'A book publisher needed instant reach to thousands of readers at launch. We built a compliant WhatsApp broadcast system that detects new titles, personalizes messages, and sends at scale with tracking and opt-outsâ€”no manual steps.',
+    summary:   'A book publisher needed instant reach to thousands of readers at launch. We built a compliant WhatsApp broadcast system that detects new titles, personalizes messages, and sends at scale with tracking and opt-outs — no manual steps.',
     metrics: [
       { value: 'Instant', label: 'Broadcast on launch' },
       { value: 'Rich',    label: 'WhatsApp messages'   },
       { value: 'Scale',   label: 'Opted-in readers'    },
     ],
-    description:  'A book publisher needed instant reach to thousands of readers at launch. We built a compliant WhatsApp broadcast system that detects new titles, personalizes messages, and sends at scale with tracking and opt-outsâ€”no manual steps.',
+    description:  'A book publisher needed instant reach to thousands of readers at launch. We built a compliant WhatsApp broadcast system that detects new titles, personalizes messages, and sends at scale with tracking and opt-outs — no manual steps.',
     category:     'WHATSAPP COMMERCE',
     metricsLabel: 'LAUNCH-DAY REACH IN MINUTES',
     sections: [
@@ -451,7 +451,7 @@ export const caseStudies = [
         title: 'Impact',
         bullets: [
           'Instant launch-day reach across thousands of opted-in readers',
-          'Hands-free publishing â†’ messaging flow with zero copy-paste',
+          'Hands-free publishing → messaging flow with zero copy-paste',
           'Higher CTR from personalized, media-rich notifications',
           'Clean compliance: consent capture, opt-outs, and audit logs',
           'Actionable insights to refine offers, timing, and segments',
@@ -460,7 +460,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 8 â”€â”€â”€ */
+  /* ─── 8 ─── */
   {
     slug:      'social-media-luxury-bike-shop',
     image:     '/SocialMediaAutomationforaChicagoLuxuryBikeShop.jpg',
@@ -470,31 +470,31 @@ export const caseStudies = [
     date:      'October 10, 2025',
     tags:      ['Social Media', 'Instagram', 'TikTok', 'LinkedIn', 'YouTube'],
     gradient:  'linear-gradient(135deg,#2C1810 0%,#C2622D 100%)',
-    icon:      'ðŸš´',
-    summary:   'We built an always-on content engine: AI generates on-brand posts + images, adds Chicago-local hashtags, and auto-publishes daily across five platformsâ€”no manual work.',
+    icon:      '🚴',
+    summary:   'We built an always-on content engine: AI generates on-brand posts + images, adds Chicago-local hashtags, and auto-publishes daily across five platforms — no manual work.',
     metrics: [
       { value: 'Daily',  label: 'Cross-platform posts' },
       { value: '5',      label: 'Platforms covered'    },
       { value: '24/7',   label: 'Always-on presence'   },
     ],
-    description:  'We built an always-on content engine: AI generates on-brand posts + images, adds Chicago-local hashtags, and auto-publishes daily across five platformsâ€”no manual work.',
+    description:  'We built an always-on content engine: AI generates on-brand posts + images, adds Chicago-local hashtags, and auto-publishes daily across five platforms — no manual work.',
     category:     'CONTENT + DISTRIBUTION',
-    metricsLabel: 'DAILY POSTING â€¢ 7 CATEGORIES',
+    metricsLabel: 'DAILY POSTING • 7 CATEGORIES',
     sections: [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'The shop had world-class builds but inconsistent posting. Editing, resizing, and rewriting per platform took hours; hashtags weren\'t localized; and posts stalled on busy weeksâ€”so discovery in Chicago lagged and DMs were quiet.',
+        content: 'The shop had world-class builds but inconsistent posting. Editing, resizing, and rewriting per platform took hours; hashtags weren\'t localized; and posts stalled on busy weeks — so discovery in Chicago lagged and DMs were quiet.',
       },
       {
         type:  'solution',
         title: 'Solution',
         bullets: [
-          'Daily Cadence: Auto-posts to Instagram, TikTok, X (Twitter), YouTube (Shorts), and LinkedInâ€”1 post/day minimum.',
+          'Daily Cadence: Auto-posts to Instagram, TikTok, X (Twitter), YouTube (Shorts), and LinkedIn — 1 post/day minimum.',
           '7 Content Categories: Modifications showcase, Repair tips, Bike transformations, Client testimonials, Maintenance advice, Before/After results, Custom builds.',
           'AI Creative: Generates images/cards and short clips when assets are missing; adapts captions to each platform; injects Chicago-local hashtags and neighborhoods (e.g., #ChicagoBikes, #WickerPark, #RiverNorth).',
           'Brand Voice: Tone/voice guide enforces premium, performance-focused messaging; CTA variations drive shop visits and DMs.',
-          'Scheduler + Guardrails: Queues a 2â€“3 week calendar, respects rate limits, and auto-skips repeats; manual approve/pause option.',
+          'Scheduler + Guardrails: Queues a 2–3 week calendar, respects rate limits, and auto-skips repeats; manual approve/pause option.',
           'Analytics Loop: Tracks reach, profile visits, DMs, and saves; boosts winners; rotates underperformers out.',
         ],
       },
@@ -507,7 +507,7 @@ export const caseStudies = [
           'Local SEO hashtags for Chicago',
           'Hands-free daily scheduling',
           'AI visuals when assets are missing',
-          'Measure â†’ learn â†’ amplify',
+          'Measure → learn → amplify',
         ],
         content: 'A simple calendar view shows upcoming posts by category and platform with preview thumbnails. The owner can drag-to-reorder, swap a photo, or let the queue run autonomously; weekly reports highlight DM spikes and best-performing angles (before/after, client testimonials, custom builds).',
       },
@@ -517,15 +517,15 @@ export const caseStudies = [
         bullets: [
           'Consistent daily presence across 5 platforms with no manual effort',
           'Increase in DMs from Chicago-area customers discovering the shop organically',
-          'Zero manual resizing or copy-pasting â€” owner focuses entirely on builds',
+          'Zero manual resizing or copy-pasting — owner focuses entirely on builds',
           'On-brand premium tone maintained consistently across all posts',
-          'Content queue maintained 2â€“3 weeks ahead automatically',
+          'Content queue maintained 2–3 weeks ahead automatically',
         ],
       },
     ],
   },
 
-  /* â”€â”€â”€ 9 â”€â”€â”€ */
+  /* ─── 9 ─── */
   {
     slug:      'whatsapp-local-service-connector',
     image:     '/WhatsAppLocalServiceConnector.png',
@@ -535,17 +535,17 @@ export const caseStudies = [
     date:      'October 05, 2025',
     tags:      ['WhatsApp', 'Service Matching', 'Automation', 'Local Business'],
     gradient:  'linear-gradient(135deg,#1a5c3a 0%,#0d3d27 100%)',
-    icon:      'ðŸ”§',
+    icon:      '🔧',
     images:    ['/WhatsAppLocalServiceConnector.png'],
-    summary:   'In one US county, residents struggled to reach reliable home-service providers quickly. We built a WhatsApp agent that understands the request, checks real-time provider availability, and connects both parties instantlyâ€”no call centers, no waiting.',
+    summary:   'In one US county, residents struggled to reach reliable home-service providers quickly. We built a WhatsApp agent that understands the request, checks real-time provider availability, and connects both parties instantly — no call centers, no waiting.',
     metrics: [
       { value: 'Seconds', label: 'Job routing time'     },
       { value: 'Vetted',  label: 'Provider network'     },
       { value: '0',       label: 'Manual coordination'  },
     ],
-    description:  'In one US county, residents struggled to reach reliable home-service providers quickly. We built a WhatsApp agent that understands the request, checks real-time provider availability, and connects both parties instantlyâ€”no call centers, no waiting.',
+    description:  'In one US county, residents struggled to reach reliable home-service providers quickly. We built a WhatsApp agent that understands the request, checks real-time provider availability, and connects both parties instantly — no call centers, no waiting.',
     category:     'LOCAL SERVICES AUTOMATION',
-    metricsLabel: 'INSTANT REQUEST â†’ PROVIDER MATCH',
+    metricsLabel: 'INSTANT REQUEST → PROVIDER MATCH',
     sections: [
       {
         type:    'challenge',
@@ -556,7 +556,7 @@ export const caseStudies = [
         type:  'solution',
         title: 'Solution',
         bullets: [
-          'WhatsApp Agent: Residents message a keyword like \'plumber needed\'. The agent collects location, urgency, and brief issue description.',
+          'WhatsApp Agent: Residents message a keyword like "plumber needed". The agent collects location, urgency, and brief issue description.',
           'Smart Matching: System checks a provider database (skills, coverage area, SLA) and current status (active/idle/do-not-disturb).',
           'Instant Connect: Shares request to the best-fit, currently active provider; once accepted, both parties receive each other\'s contact details for direct follow-up.',
           'Fallback & Escalation: If no active provider, queue the request, ping next-best, or escalate to a manual dispatcher.',
@@ -570,12 +570,12 @@ export const caseStudies = [
         bullets: [
           'Frictionless WhatsApp intake',
           'Real-time availability matching',
-          'Direct customerâ†”provider connection',
+          'Direct customer ↔ provider connection',
           'Fail-safes for off-hours coverage',
           'Quality tracking & feedback loop',
           'Recurring subscriptions for providers',
         ],
-        content: 'Operations staff can view a live queue, override matches, or pause categories during storms/peaks. Providers toggle \'Active\' in one tap; the agent respects do-not-disturb windows and rotates jobs fairly across subscribers.',
+        content: 'Operations staff can view a live queue, override matches, or pause categories during storms/peaks. Providers toggle "Active" in one tap; the agent respects do-not-disturb windows and rotates jobs fairly across subscribers.',
       },
       {
         type:  'impact',
@@ -591,7 +591,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 10 â”€â”€â”€ */
+  /* ─── 10 ─── */
   {
     slug:      'qr-event-attendance-automation',
     image:     '/QR-BasedEventAttendanceAutomation1.png',
@@ -601,17 +601,17 @@ export const caseStudies = [
     date:      'October 13, 2025',
     tags:      ['QR Code', 'Event Tech', 'Attendance', 'No Third-Party Fees'],
     gradient:  'linear-gradient(135deg,#1A3A5A 0%,#2D6A9F 100%)',
-    icon:      'ðŸŽ«',
+    icon:      '🎫',
     images:    ['/QR-BasedEventAttendanceAutomation1.png', '/QR-BasedEventAttendanceAutomation2.png'],
-    summary:   'We built a lean, secure event check-in system: unique QR codes per attendee, instant database verification, and one-scan-only gatekeeping to stop pass-aroundsâ€”without paying per-attendee platform fees.',
+    summary:   'We built a lean, secure event check-in system: unique QR codes per attendee, instant database verification, and one-scan-only gatekeeping to stop pass-arounds — without paying per-attendee platform fees.',
     metrics: [
       { value: '$0',    label: 'Third-party fees'    },
       { value: 'Zero',  label: 'Duplicate entry risk'},
       { value: 'Live',  label: 'Attendance updates'  },
     ],
-    description:  'We built a lean, secure event check-in system: unique QR codes per attendee, instant database verification, and one-scan-only gatekeeping to stop pass-aroundsâ€”without paying per-attendee platform fees.',
+    description:  'We built a lean, secure event check-in system: unique QR codes per attendee, instant database verification, and one-scan-only gatekeeping to stop pass-arounds — without paying per-attendee platform fees.',
     category:     'EVENT OPS AUTOMATION',
-    metricsLabel: '1-SCAN-ONLY â€¢ REAL-TIME UPDATE',
+    metricsLabel: '1-SCAN-ONLY • REAL-TIME UPDATE',
     sections: [
       {
         type:    'challenge',
@@ -657,7 +657,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 11 â”€â”€â”€ */
+  /* ─── 11 ─── */
   {
     slug:      'youtube-comment-automation',
     image:     '/AutomatingYouTubeEngagementwithN8N.png',
@@ -667,28 +667,28 @@ export const caseStudies = [
     date:      'October 16, 2025',
     tags:      ['YouTube', 'Comment Automation', 'n8n', 'Engagement'],
     gradient:  'linear-gradient(135deg,#7A1A1A 0%,#C2622D 100%)',
-    icon:      'â–¶ï¸',
+    icon:      '▶️',
     images:    ['/AutomatingYouTubeEngagementwithN8N.png', '/AutomatingYouTubeEngagementwithN8N2.png'],
-    summary:   'Our client, a fast-growing YouTube creator, was overwhelmed by hundreds of comments per video. We built a smart N8N automation that instantly replies in their brand voice â€” saving over 10 hours weekly and boosting engagement 3x.',
+    summary:   'Our client, a fast-growing YouTube creator, was overwhelmed by hundreds of comments per video. We built a smart N8N automation that instantly replies in their brand voice — saving over 10 hours weekly and boosting engagement 3×.',
     metrics: [
       { value: '10+hrs', label: 'Saved weekly'          },
-      { value: '3Ã—',     label: 'Engagement boost'      },
+      { value: '3×',     label: 'Engagement boost'      },
       { value: '$0',     label: 'Third-party tool cost' },
     ],
-    description:  'Our client, a fast-growing YouTube creator, was overwhelmed by hundreds of comments per video. We built a smart N8N automation that instantly replies in their brand voice â€” saving over 10 hours weekly and boosting engagement 3x.',
+    description:  'Our client, a fast-growing YouTube creator, was overwhelmed by hundreds of comments per video. We built a smart N8N automation that instantly replies in their brand voice — saving over 10 hours weekly and boosting engagement 3×.',
     category:     'CREATOR AUTOMATION',
-    metricsLabel: '10+ HOURS SAVED â€¢ 3X ENGAGEMENT',
+    metricsLabel: '10+ HOURS SAVED • 3× ENGAGEMENT',
     sections: [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'The client\'s YouTube channel was growing fast â€” but each upload brought hundreds of new comments. Their small team struggled to reply promptly, leaving loyal fans unanswered. Engagement was dropping, and community sentiment was fading. They needed a solution that could maintain authenticity while removing the manual workload.',
+        content: 'The client\'s YouTube channel was growing fast — but each upload brought hundreds of new comments. Their small team struggled to reply promptly, leaving loyal fans unanswered. Engagement was dropping, and community sentiment was fading. They needed a solution that could maintain authenticity while removing the manual workload.',
       },
       {
         type:  'solution',
         title: 'Solution',
         bullets: [
-          'We designed a fully custom workflow inside N8N â€” no third-party tools, no extra APIs.',
+          'We designed a fully custom workflow inside N8N — no third-party tools, no extra APIs.',
           'The system uses the YouTube Data API to track new comments in real time.',
           'For each comment, N8N analyzes the tone and content to determine intent (praise, question, or feedback).',
           'It then generates a reply in the creator\'s exact brand voice, trained on previous responses.',
@@ -700,22 +700,22 @@ export const caseStudies = [
         type:  'whyItWorks',
         title: 'Why It Works',
         bullets: [
-          'Completely built in N8N â€” no SaaS tools or API fees',
+          'Completely built in N8N — no SaaS tools or API fees',
           'Replies in authentic, brand-specific tone',
           'Real-time comment tracking and responses',
           'Context-aware, intelligent reply generation',
           'Zero manual moderation required',
           'Scalable for multiple channels',
         ],
-        content: 'The workflow runs 24/7 â€” watching every video, Short, and community post. When a comment arrives, it replies in under 5 minutes, keeping engagement constant. The automation respects YouTube\'s rate limits and stores all responses in Google Sheets for transparency. The creator now interacts with fans automatically while staying true to their voice.',
+        content: 'The workflow runs 24/7 — watching every video, Short, and community post. When a comment arrives, it replies in under 5 minutes, keeping engagement constant. The automation respects YouTube\'s rate limits and stores all responses in Google Sheets for transparency. The creator now interacts with fans automatically while staying true to their voice.',
       },
       {
         type:  'impact',
         title: 'Impact',
         bullets: [
           '10+ hours saved weekly on manual comment management',
-          'Engagement rate increased by 3x within 2 weeks',
-          'Audience sentiment improved â€” comments feel personal',
+          'Engagement rate increased by 3× within 2 weeks',
+          'Audience sentiment improved — comments feel personal',
           'No added cost: built entirely with open-source N8N',
           '100% consistency in tone, speed, and accuracy',
         ],
@@ -723,7 +723,7 @@ export const caseStudies = [
     ],
   },
 
-  /* â”€â”€â”€ 12 â”€â”€â”€ */
+  /* ─── 12 ─── */
   {
     slug:      'document-consolidation-auto-foldering',
     image:     '/DocumentConsolidationAutoFoldering.jpg',
@@ -733,7 +733,7 @@ export const caseStudies = [
     date:      'October 05, 2025',
     tags:      ['Google Drive', 'Document Automation', 'Consultancy', 'Operations'],
     gradient:  'linear-gradient(135deg,#8A6A5A 0%,#3D2314 100%)',
-    icon:      'ðŸ“',
+    icon:      '📁',
     summary:   'Consultancy firms were manually filling multiple templates per client and filing them in the right folders. We delivered a single smart form that captures client data (plus images), populates every template, auto-names files, and saves everything into a client-specific Google Drive structure.',
     metrics: [
       { value: 'One',   label: 'Form triggers all docs'},
@@ -747,7 +747,7 @@ export const caseStudies = [
       {
         type:    'challenge',
         title:   'Challenge',
-        content: 'Consultancy teams handled different consolidation packs (engagement letters, KYC, scopes, approvals) across many clients. Manual data entry into multiple templates led to version mix-ups, wrong file names, scattered images, and misplaced foldersâ€”hurting speed and compliance.',
+        content: 'Consultancy teams handled different consolidation packs (engagement letters, KYC, scopes, approvals) across many clients. Manual data entry into multiple templates led to version mix-ups, wrong file names, scattered images, and misplaced folders — hurting speed and compliance.',
       },
       {
         type:  'solution',
@@ -756,7 +756,7 @@ export const caseStudies = [
           'Unified Intake (Consultancy-Ready): A single form where teammates choose the consolidation pack and enter core client data.',
           'Data Fields Captured: Client Name, Engagement ID, Service Line, Primary Contact, Email/Phone, Billing Address, Project Address, Consultant Owner, Deadlines/Milestones, Fee & Currency, Tax IDs/GST, Scope Notes, KYC fields (PAN/ID types), Signatories, Custom Clauses.',
           'Template Merge: Auto-populate all approved templates (Engagement Letter, KYC Form, NDA, Scope of Work, Fee Schedule, Approval Sheet) with the captured fields, placed exactly per template positions.',
-          'Image & File Uploads: Upload client logos, ID proofs, site photos, and signatures from the same form. Files are stored under Google Drive â†’ Client Folder â†’ /assets and linked into documents where required (e.g., logo on letterhead, ID proof in KYC).',
+          'Image & File Uploads: Upload client logos, ID proofs, site photos, and signatures from the same form. Files are stored under Google Drive → Client Folder → /assets and linked into documents where required (e.g., logo on letterhead, ID proof in KYC).',
           'Smart Naming & Auto-Foldering: Use a strict schema (ClientName_ConsolidationType_Date_v1). Create the client root folder if missing and place documents in subfolders ("01_Intake", "02_Agreements", "03_KYC", "04_Approvals", "assets").',
           'Drive Sync & Permissions: Save to Google Drive with correct access for the consultancy team; log creator, timestamp, and version.',
           'Status, E-Sign & QC: Dashboard shows completion status, missing fields, and e-signature progress; sends e-sign requests automatically and flags exceptions for review.',
@@ -767,7 +767,7 @@ export const caseStudies = [
         title: 'Why it Works',
         bullets: [
           'Built for consultancy workflows',
-          'Single intake â†’ many documents',
+          'Single intake → many documents',
           'Exact field placement in templates',
           'Zero manual naming/filing',
           'Auto-permissions & audit trail',
@@ -790,4 +790,3 @@ export const caseStudies = [
   },
 
 ]
-

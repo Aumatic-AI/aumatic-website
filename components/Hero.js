@@ -1,208 +1,290 @@
-import { motion } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 
-const up = { hidden:{ opacity:0, y:28 }, show:(d=0)=>({ opacity:1, y:0, transition:{ duration:0.8, delay:d, ease:[0.22,1,0.36,1] }}) }
+/* ── Magnetic CTA — pulls toward cursor ─────────────────────── */
+function Magnetic({ children, strength = 0.22, className }) {
+  const ref = useRef(null)
+  const onMove = (e) => {
+    const el = ref.current; if (!el) return
+    const r = el.getBoundingClientRect()
+    const x = e.clientX - r.left - r.width / 2
+    const y = e.clientY - r.top  - r.height / 2
+    el.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`
+  }
+  const onLeave = () => { if (ref.current) ref.current.style.transform = 'translate3d(0,0,0)' }
+  return (
+    <span
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className={className}
+      style={{ display: 'inline-block', transition: 'transform 0.45s cubic-bezier(0.22,1,0.36,1)', willChange: 'transform' }}
+    >
+      {children}
+    </span>
+  )
+}
+
+/* ── Word-by-word reveal headline ───────────────────────────── */
+function WordReveal({ children, delay = 0, italic = false, accent = false }) {
+  return (
+    <span style={{ display: 'inline-block', overflow: 'hidden', verticalAlign: 'bottom', paddingBottom: '0.08em', paddingRight: '0.04em' }}>
+      <motion.span
+        initial={{ y: '110%', opacity: 0 }}
+        animate={{ y: '0%', opacity: 1 }}
+        transition={{ delay, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          display: 'inline-block',
+          fontStyle: italic ? 'italic' : 'normal',
+          color: accent ? '#C2622D' : 'inherit',
+        }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  )
+}
 
 export default function Hero() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+
+  // Parallax depth for background layers
+  const y1 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -120]), { stiffness: 80, damping: 20 })
+  const y2 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -220]), { stiffness: 80, damping: 20 })
+  const opacityFade = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+
   return (
-    <section style={{
-      minHeight: '100vh', position: 'relative', overflow: 'hidden',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-      paddingTop: 96, paddingBottom: 80,
-      background: 'linear-gradient(145deg, #E8D9C4 0%, #F0E3CF 40%, #E4D4BC 100%)',
-    }}>
+    <section
+      ref={ref}
+      style={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+        paddingTop: 120, paddingBottom: 96,
+        overflow: 'hidden',
+        background: 'linear-gradient(180deg, #EFE6D8 0%, #F5EFE8 60%, #EFE6D8 100%)',
+      }}
+    >
+      {/* ── Layered warm blobs (parallax) ── */}
+      <motion.div style={{ position: 'absolute', inset: 0, y: y1, opacity: opacityFade, pointerEvents: 'none' }}>
+        <div className="anim-blob1" style={{
+          position: 'absolute', top: '-16%', left: '-12%', width: 780, height: 780,
+          borderRadius: '50%', filter: 'blur(70px)',
+          background: 'radial-gradient(circle, rgba(194,98,45,0.34) 0%, rgba(210,130,55,0.14) 50%, transparent 70%)',
+        }} />
+        <div className="anim-blob2" style={{
+          position: 'absolute', top: '-10%', right: '-10%', width: 700, height: 700,
+          borderRadius: '50%', filter: 'blur(60px)',
+          background: 'radial-gradient(circle, rgba(220,150,60,0.32) 0%, rgba(230,170,80,0.14) 50%, transparent 70%)',
+        }} />
+      </motion.div>
 
-      <style>{`
-        /* ── blob animations ── */
-        @keyframes heroBlob1 {
-          0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(60px,-45px) scale(1.12)} 66%{transform:translate(-30px,35px) scale(0.93)}
-        }
-        @keyframes heroBlob2 {
-          0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(-70px,40px) scale(0.92)} 66%{transform:translate(45px,-30px) scale(1.1)}
-        }
-        @keyframes heroBlob3 {
-          0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,-55px) scale(1.08)}
-        }
-        @keyframes heroBlob4 {
-          0%,100%{transform:translate(0,0) scale(1)} 40%{transform:translate(-40px,50px) scale(1.06)} 80%{transform:translate(50px,20px) scale(0.95)}
-        }
-        @keyframes heroRing {
-          0%,100%{opacity:0.07;transform:translate(-50%,-50%) scale(1)} 50%{opacity:0.14;transform:translate(-50%,-50%) scale(1.04)}
-        }
-        @keyframes spinStar { to { transform: rotate(360deg); } }
-        @keyframes shimmerSweep {
-          0%   { left: -80%; }
-          100% { left: 150%; }
-        }
+      <motion.div style={{ position: 'absolute', inset: 0, y: y2, opacity: opacityFade, pointerEvents: 'none' }}>
+        <div className="anim-blob3" style={{
+          position: 'absolute', bottom: '-20%', left: '15%', width: 640, height: 640,
+          borderRadius: '50%', filter: 'blur(72px)',
+          background: 'radial-gradient(circle, rgba(180,90,35,0.28) 0%, rgba(200,120,60,0.12) 50%, transparent 70%)',
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '4%', right: '4%', width: 500, height: 500,
+          borderRadius: '50%', filter: 'blur(56px)',
+          background: 'radial-gradient(circle, rgba(230,165,70,0.24) 0%, transparent 65%)',
+        }} />
+      </motion.div>
 
-        /* ── Badge hover ── */
-        .hero-badge {
-          transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
-          cursor: default;
-        }
-        .hero-badge:hover {
-          background: rgba(255,255,255,0.95) !important;
-          border-color: rgba(194,98,45,0.55) !important;
-          box-shadow: 0 6px 28px rgba(194,98,45,0.22), 0 0 0 4px rgba(194,98,45,0.07) !important;
-          transform: translateY(-3px) scale(1.04);
-        }
-        .hero-badge:hover .badge-star { animation: spinStar 0.55s cubic-bezier(0.22,1,0.36,1); }
+      {/* Bright center spotlight */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        background: 'radial-gradient(ellipse 60% 50% at 50% 46%, rgba(255,248,238,0.72) 0%, transparent 70%)',
+      }} />
 
-        /* ── Heading word hover ── */
-        .hero-word {
-          position: relative;
-          display: inline-block;
-          cursor: default;
-          transition: filter 0.3s ease;
-        }
-        .hero-word::after {
-          content: '';
-          position: absolute;
-          left: 0; bottom: -6px;
-          width: 100%; height: 3px;
-          background: linear-gradient(90deg, #C2622D 0%, #F0A060 50%, #C2622D 100%);
-          border-radius: 3px;
-          transform: scaleX(0);
-          transform-origin: left center;
-          transition: transform 0.45s cubic-bezier(0.22,1,0.36,1);
-        }
-        .hero-word:hover::after { transform: scaleX(1); }
-        .hero-word:hover { filter: brightness(1.15) drop-shadow(0 0 18px rgba(194,98,45,0.55)); }
-
-        /* ── CTA shimmer sweep ── */
-        .hero-cta {
-          position: relative;
-          overflow: hidden;
-          transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1) !important;
-        }
-        .hero-cta::after {
-          content: '';
-          position: absolute;
-          top: 0; left: -80%;
-          width: 55%; height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
-          transform: skewX(-18deg);
-          pointer-events: none;
-        }
-        .hero-cta:hover::after {
-          animation: shimmerSweep 0.55s ease forwards;
-        }
-        .hero-cta:hover {
-          box-shadow: 0 14px 48px rgba(194,98,45,0.6) !important;
-          transform: translateY(-3px) scale(1.03);
-        }
-
-        /* ── Trust badge hover ── */
-        .trust-item {
-          padding: 7px 16px;
-          border-radius: 99px;
-          border: 1px solid transparent;
-          transition: background 0.28s ease, border-color 0.28s ease, transform 0.28s cubic-bezier(0.22,1,0.36,1);
-          cursor: default;
-        }
-        .trust-item:hover {
-          background: rgba(194,98,45,0.09);
-          border-color: rgba(194,98,45,0.25);
-          transform: translateY(-3px);
-        }
-        .trust-dot {
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .trust-item:hover .trust-dot {
-          transform: scale(1.8);
-          box-shadow: 0 0 14px rgba(194,98,45,0.9) !important;
-        }
-      `}</style>
-
-      {/* ── Animated color blobs ── */}
-      <div style={{ position:'absolute', top:'-15%', left:'-10%', width:750, height:750, borderRadius:'50%', pointerEvents:'none', filter:'blur(60px)', background:'radial-gradient(circle, rgba(194,98,45,0.38) 0%, rgba(210,130,55,0.18) 50%, transparent 70%)', animation:'heroBlob1 22s ease-in-out infinite' }} />
-      <div style={{ position:'absolute', top:'-12%', right:'-8%', width:680, height:680, borderRadius:'50%', pointerEvents:'none', filter:'blur(55px)', background:'radial-gradient(circle, rgba(220,150,60,0.35) 0%, rgba(230,170,80,0.16) 50%, transparent 70%)', animation:'heroBlob2 26s ease-in-out infinite' }} />
-      <div style={{ position:'absolute', bottom:'-18%', left:'15%', width:620, height:620, borderRadius:'50%', pointerEvents:'none', filter:'blur(65px)', background:'radial-gradient(circle, rgba(180,90,35,0.30) 0%, rgba(200,120,60,0.14) 50%, transparent 70%)', animation:'heroBlob3 30s ease-in-out infinite' }} />
-      <div style={{ position:'absolute', bottom:'5%', right:'5%', width:500, height:500, borderRadius:'50%', pointerEvents:'none', filter:'blur(50px)', background:'radial-gradient(circle, rgba(230,165,70,0.28) 0%, transparent 65%)', animation:'heroBlob4 18s ease-in-out infinite' }} />
-
-      {/* ── Center bright zone ── */}
-      <div style={{ position:'absolute', inset:0, pointerEvents:'none', background:'radial-gradient(ellipse 65% 55% at 50% 46%, rgba(255,248,238,0.68) 0%, transparent 70%)' }} />
-
-      {/* ── Decorative rings ── */}
-      <svg style={{ position:'absolute', top:'50%', left:'50%', width:'min(900px,90vw)', height:'min(900px,90vw)', pointerEvents:'none', animation:'heroRing 8s ease-in-out infinite' }} viewBox="0 0 900 900" fill="none">
-        <circle cx="450" cy="450" r="380" stroke="rgba(194,98,45,0.10)" strokeWidth="1.5" strokeDasharray="6 14"/>
-        <circle cx="450" cy="450" r="280" stroke="rgba(194,98,45,0.07)" strokeWidth="1"   strokeDasharray="4 18"/>
+      {/* Decorative concentric rings */}
+      <svg
+        style={{ position: 'absolute', top: '50%', left: '50%', width: 'min(940px,92vw)', height: 'min(940px,92vw)', transform: 'translate(-50%,-50%)', opacity: 0.5, pointerEvents: 'none' }}
+        viewBox="0 0 900 900" fill="none"
+      >
+        <circle cx="450" cy="450" r="420" stroke="rgba(194,98,45,0.10)" strokeWidth="1"   strokeDasharray="2 12"/>
+        <circle cx="450" cy="450" r="330" stroke="rgba(194,98,45,0.13)" strokeWidth="1"   strokeDasharray="3 16"/>
+        <circle cx="450" cy="450" r="240" stroke="rgba(194,98,45,0.08)" strokeWidth="0.8" strokeDasharray="2 22"/>
       </svg>
 
-      {/* ── Grain texture ── */}
-      <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.055, pointerEvents:'none' }} xmlns="http://www.w3.org/2000/svg">
-        <filter id="hgrain"><feTurbulence type="fractalNoise" baseFrequency="0.68" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
-        <rect width="100%" height="100%" filter="url(#hgrain)"/>
-      </svg>
-
-      {/* ── Floating sparkle particles ── */}
+      {/* Sparkle particles — float upward */}
       {[
-        { l:'12%', t:'72%', s:4, o:0.7, d:0,   dur:9  },
-        { l:'22%', t:'60%', s:3, o:0.5, d:1.5, dur:12 },
-        { l:'35%', t:'78%', s:5, o:0.8, d:0.8, dur:10 },
-        { l:'48%', t:'68%', s:3, o:0.6, d:3,   dur:14 },
-        { l:'58%', t:'82%', s:4, o:0.7, d:2,   dur:11 },
-        { l:'68%', t:'65%', s:3, o:0.5, d:4,   dur:13 },
-        { l:'78%', t:'75%', s:5, o:0.8, d:1,   dur:9  },
-        { l:'88%', t:'58%', s:3, o:0.6, d:2.5, dur:15 },
-        { l:'18%', t:'88%', s:4, o:0.5, d:5,   dur:10 },
-        { l:'42%', t:'55%', s:3, o:0.7, d:3.5, dur:12 },
-        { l:'62%', t:'90%', s:5, o:0.6, d:1.8, dur:11 },
-        { l:'82%', t:'85%', s:3, o:0.8, d:4.2, dur:13 },
+        { l:'12%', t:'78%', s:3, o:0.6, d:0,   dur:11 },
+        { l:'22%', t:'62%', s:4, o:0.5, d:1.6, dur:13 },
+        { l:'35%', t:'80%', s:3, o:0.7, d:0.9, dur:10 },
+        { l:'58%', t:'82%', s:4, o:0.6, d:2.2, dur:12 },
+        { l:'68%', t:'66%', s:3, o:0.5, d:4.0, dur:14 },
+        { l:'78%', t:'76%', s:4, o:0.7, d:1.2, dur:10 },
+        { l:'88%', t:'58%', s:3, o:0.5, d:2.8, dur:15 },
+        { l:'18%', t:'88%', s:3, o:0.5, d:5.0, dur:11 },
+        { l:'42%', t:'58%', s:3, o:0.6, d:3.4, dur:12 },
+        { l:'62%', t:'90%', s:4, o:0.6, d:1.8, dur:13 },
       ].map((p, i) => (
-        <div key={i} style={{ position:'absolute', left:p.l, top:p.t, width:p.s, height:p.s, borderRadius:'50%', background:'#C2622D', opacity:p.o, boxShadow:`0 0 ${p.s*2.5}px rgba(194,98,45,0.9), 0 0 ${p.s*5}px rgba(194,98,45,0.4)`, animation:`float-particle ${p.dur}s ease-in-out ${p.d}s infinite`, pointerEvents:'none' }} />
+        <span key={i} style={{
+          position:'absolute', left:p.l, top:p.t,
+          width:p.s, height:p.s, borderRadius:'50%',
+          background:'#C2622D', opacity:p.o,
+          boxShadow:`0 0 ${p.s*2.5}px rgba(194,98,45,0.7)`,
+          animation:`float-particle ${p.dur}s ease-in-out ${p.d}s infinite`,
+          pointerEvents:'none',
+        }} />
       ))}
 
-      {/* ── Bottom wave ── */}
-      <svg style={{ position:'absolute', bottom:0, left:0, right:0, width:'100%', opacity:0.55 }} viewBox="0 0 1440 100" fill="none" preserveAspectRatio="none">
-        <path d="M0,60 C360,100 720,20 1080,65 C1260,87 1380,45 1440,55 L1440,100 L0,100Z" fill="rgba(160,75,25,0.10)" />
-        <path d="M0,80 C400,45 800,90 1200,60 C1320,48 1400,72 1440,80 L1440,100 L0,100Z" fill="rgba(160,75,25,0.06)" />
-      </svg>
+      {/* ── Content ── */}
+      <div style={{
+        position: 'relative', zIndex: 3,
+        maxWidth: 1100, margin: '0 auto',
+        padding: '0 clamp(20px,4vw,32px)',
+        textAlign: 'center',
+      }}>
 
-      <div style={{ maxWidth:1200, margin:'0 auto', padding:'0 clamp(16px,4vw,24px)', textAlign:'center', position:'relative', zIndex:3 }}>
-
-        {/* Badge */}
-        <motion.div variants={up} initial="hidden" animate="show" custom={0} className="hero-badge"
-          style={{ display:'inline-flex', alignItems:'center', gap:9, padding:'8px 20px', borderRadius:99, background:'rgba(255,255,255,0.75)', border:'1px solid rgba(194,98,45,0.22)', boxShadow:'0 2px 16px rgba(194,98,45,0.1)', marginBottom:40 }}>
-          <svg className="badge-star" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C2622D" strokeWidth="2" strokeLinecap="round">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <span style={{ fontSize:14, fontWeight:600, color:'#3D2314', letterSpacing:0.2 }}>AI Automation Experts</span>
-          <span style={{ width:7, height:7, borderRadius:99, background:'#C2622D', boxShadow:'0 0 8px rgba(194,98,45,0.6)', flexShrink:0 }} />
+        {/* Eyebrow badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22,1,0.36,1] }}
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10,
+            padding: '7px 16px 7px 11px',
+            background: 'rgba(255,255,255,0.7)',
+            border: '1px solid rgba(194,98,45,0.18)',
+            borderRadius: 999,
+            marginBottom: 36,
+            boxShadow: '0 4px 18px rgba(194,98,45,0.08)',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <span style={{
+            display: 'inline-flex', width: 22, height: 22, borderRadius: 99,
+            background: 'linear-gradient(135deg, #C2622D, #E8A060)',
+            alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 2px 8px rgba(194,98,45,0.4)',
+          }}>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </span>
+          <span style={{ fontSize: 13, fontWeight: 600, color: '#3D2314', letterSpacing: 0.2 }}>
+            AI Automation Studio · India + Global
+          </span>
+          <span style={{ width: 6, height: 6, borderRadius: 99, background: '#10B981', boxShadow: '0 0 8px #10B981' }} />
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1 variants={up} initial="hidden" animate="show" custom={0.1}
-          style={{ fontFamily:"'Montserrat', sans-serif", fontSize:'clamp(52px,7vw,92px)', fontWeight:900, lineHeight:1.05, letterSpacing:'-3px', marginBottom:36, color:'#1A0F0A' }}>
-          We Build & Deploy{' '}
-          <span className="hero-word shimmer-text">Intelligent</span>
-          {' '}
-          <span className="hero-word shimmer-text" style={{ animationDelay:'0.6s' }}>Automation</span>
-          {' '}for Your Business
-        </motion.h1>
+        {/* Display headline — Instrument Serif */}
+        <h1 style={{
+          fontFamily: "'Instrument Serif', serif",
+          fontSize: 'clamp(54px, 8vw, 112px)',
+          fontWeight: 400,
+          letterSpacing: '-0.03em',
+          lineHeight: 0.98,
+          marginBottom: 28,
+          color: '#1A0F0A',
+        }}>
+          <span style={{ display: 'block' }}>
+            <WordReveal delay={0.05}>We design</WordReveal>{' '}
+            <WordReveal delay={0.18} italic accent>intelligent</WordReveal>
+          </span>
+          <span style={{ display: 'block' }}>
+            <WordReveal delay={0.30}>automation that</WordReveal>{' '}
+            <WordReveal delay={0.44} italic accent>ships</WordReveal>
+            <WordReveal delay={0.56}>.</WordReveal>
+          </span>
+        </h1>
 
         {/* Sub */}
-        <motion.p variants={up} initial="hidden" animate="show" custom={0.2}
-          style={{ fontSize:'clamp(19px,2.2vw,24px)', lineHeight:1.85, color:'#5C3D2A', maxWidth:660, margin:'0 auto 56px', fontWeight:400 }}>
-          We analyze your workflows, design custom AI systems, and deploy automations that save your team hundreds of hours every month.
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.65, duration: 0.7, ease: [0.22,1,0.36,1] }}
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 'clamp(17px, 1.5vw, 20px)',
+            lineHeight: 1.6,
+            color: '#5C3D2A',
+            maxWidth: 620,
+            margin: '0 auto 44px',
+            fontWeight: 400,
+          }}
+        >
+          We map your workflows, architect AI systems around them, and deploy automations that compound hundreds of hours back into your team every month.
         </motion.p>
 
-        {/* CTA */}
-        <motion.div variants={up} initial="hidden" animate="show" custom={0.3} style={{ marginBottom:52 }}>
-          <a href="https://cal.com/chandan-kumar-zhrofj/30min" target="_blank" rel="noopener noreferrer" className="hero-cta"
-            style={{ display:'inline-flex', alignItems:'center', gap:12, padding:'18px 42px', borderRadius:13, fontSize:18, fontWeight:700, background:'linear-gradient(135deg,#C2622D,#A8501F)', color:'white', textDecoration:'none', boxShadow:'0 8px 32px rgba(194,98,45,0.45)', letterSpacing:0.3 }}>
-            Book a Free Call <span style={{ fontSize:18 }}>→</span>
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.78, duration: 0.7, ease: [0.22,1,0.36,1] }}
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 14, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 48 }}
+        >
+          <Magnetic strength={0.18}>
+            <a href="https://cal.com/chandan-kumar-zhrofj/30min" target="_blank" rel="noopener noreferrer"
+              className="btn btn-primary"
+              style={{ padding: '15px 26px', fontSize: 15 }}
+            >
+              Book a free strategy call
+              <span className="btn-arrow" style={{ display: 'inline-flex' }}>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </a>
+          </Magnetic>
+          <a href="#case-studies" className="btn btn-ghost" style={{ padding: '15px 22px', fontSize: 15 }}>
+            See our work
           </a>
         </motion.div>
 
         {/* Trust row */}
-        <motion.div variants={up} initial="hidden" animate="show" custom={0.4}
-          style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'clamp(8px,2vw,16px)', flexWrap:'wrap' }}>
-          {['Certified AI Partner','Top Rated Agency','100+ Automations Built'].map((text, i) => (
-            <div key={i} className="trust-item" style={{ display:'flex', alignItems:'center', gap:8 }}>
-              <span className="trust-dot" style={{ width:8, height:8, borderRadius:99, background:'#C2622D', boxShadow:'0 0 6px rgba(194,98,45,0.5)', flexShrink:0 }} />
-              <span style={{ fontSize:15, color:'#5C3D2A', fontWeight:500 }}>{text}</span>
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.92, duration: 0.7 }}
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'clamp(8px,2vw,20px)',
+            flexWrap: 'wrap',
+          }}
+        >
+          {[
+            { v: '100+', l: 'Automations shipped' },
+            { v: '5+',   l: 'Industries served' },
+            { v: '8k+',  l: 'Hours saved / month' },
+          ].map((s, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              {i > 0 && <span style={{ width: 4, height: 4, borderRadius: 99, background: 'rgba(194,98,45,0.35)' }} />}
+              <span style={{
+                fontFamily: "'Instrument Serif', serif",
+                fontSize: 22, fontWeight: 400, color: '#1A0F0A', letterSpacing: -0.4,
+              }}>
+                {s.v}
+              </span>
+              <span style={{ fontSize: 13, color: '#5C3D2A', fontWeight: 500 }}>{s.l}</span>
             </div>
           ))}
+        </motion.div>
+
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
+          style={{
+            position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+          }}
+        >
+          <span style={{ fontSize: 10, fontWeight: 600, letterSpacing: 2.4, textTransform: 'uppercase', color: '#8A6A5A' }}>
+            Scroll
+          </span>
+          <motion.div
+            animate={{ y: [0, 8, 0], opacity: [0.4, 1, 0.4] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ width: 1, height: 28, background: 'linear-gradient(180deg, transparent, #C2622D, transparent)' }}
+          />
         </motion.div>
       </div>
     </section>

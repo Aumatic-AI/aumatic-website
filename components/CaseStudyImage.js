@@ -100,19 +100,43 @@ export default function CaseStudyImage({ label, src }) {
 
   if (src) {
     return (
-      <motion.div
+      <motion.figure
         ref={ref}
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 28 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.65 }}
-        style={{ maxWidth: 1100, margin: '0 auto', padding: '0 clamp(16px,4vw,40px)', marginBottom: 56 }}
+        transition={{ duration: 0.8, ease: [0.22,1,0.36,1] }}
+        style={{ maxWidth: 1100, margin: '0 auto clamp(56px,7vw,80px)', padding: '0 clamp(20px,3vw,40px)' }}
       >
-        <img
-          src={src}
-          alt={label || 'Workflow diagram'}
-          style={{ width: '100%', display: 'block', borderRadius: 18, objectFit: 'cover', boxShadow: '0 2px 32px rgba(194,98,45,0.12)' }}
-        />
-      </motion.div>
+        {label && (
+          <figcaption style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 11, fontWeight: 600, letterSpacing: 2.2, textTransform: 'uppercase',
+            color: '#C2622D', marginBottom: 14,
+            display: 'inline-flex', alignItems: 'center', gap: 10,
+          }}>
+            <span style={{ width: 18, height: 1, background: 'linear-gradient(90deg, transparent, #C2622D)' }} />
+            {label}
+          </figcaption>
+        )}
+        <div style={{
+          position: 'relative',
+          borderRadius: 20, overflow: 'hidden',
+          background: 'var(--night)',
+          border: '1px solid var(--hair-warm)',
+          boxShadow: '0 2px 4px rgba(20,16,12,0.04), 0 30px 70px rgba(194,98,45,0.10)',
+        }}>
+          <img
+            src={src}
+            alt={label || 'Workflow diagram'}
+            style={{ width: '100%', display: 'block', objectFit: 'cover' }}
+          />
+          {/* Subtle frame veil */}
+          <div style={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            background: 'linear-gradient(180deg, rgba(20,16,12,0) 70%, rgba(20,16,12,0.18) 100%)',
+          }} />
+        </div>
+      </motion.figure>
     )
   }
 
