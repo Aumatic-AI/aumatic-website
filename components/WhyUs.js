@@ -1,146 +1,385 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const Icon = ({ children }) => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C2622D" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">{children}</svg>
-)
-
 const REASONS = [
   {
-    icon: <Icon><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></Icon>,
+    num: '01',
     title: 'Full-stack AI expertise',
-    desc: "We handle the entire automation lifecycle — strategy, architecture, build, deployment, optimization. One team. One throat to choke.",
+    desc: 'We handle the entire automation lifecycle — strategy, architecture, build, deployment, optimization. One team. One throat to choke.',
   },
   {
-    icon: <Icon><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></Icon>,
+    num: '02',
     title: 'Outcome guarantee',
     desc: 'Every engagement comes with measurable KPIs. If we miss the target, we keep working until we hit it.',
   },
   {
-    icon: <Icon><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></Icon>,
+    num: '03',
     title: 'Tool-agnostic by design',
     desc: "We're not locked into vendors. We choose the right tech for your problem — not the one paying us a referral fee.",
   },
   {
-    icon: <Icon><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></Icon>,
+    num: '04',
     title: 'Consultative partnership',
     desc: "We embed with your team, learn your culture, and surface opportunities you didn't know existed.",
   },
 ]
 
-function Card({ r, i }) {
+function ReasonCard({ reason, index }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  const inView = useInView(ref, {
+    once: true,
+    margin: '-60px',
+  })
 
   return (
-    <motion.div
+    <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: (i % 2) * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      style={{
-        display: 'flex', gap: 22, alignItems: 'flex-start',
-        padding: '24px 4px',
-        borderTop: i > 1 ? '1px solid var(--hair-warm)' : 'none',
+      initial={{
+        opacity: 0,
+        y: 24,
       }}
-      className="why-card"
+      animate={
+        inView
+          ? {
+              opacity: 1,
+              y: 0,
+            }
+          : {}
+      }
+      transition={{
+        duration: 0.65,
+        delay: index * 0.07,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="reason-card"
+      style={{
+        position: 'relative',
+        minHeight: 'clamp(220px, 17vw, 270px)',
+        padding: 'clamp(22px, 2vw, 30px)',
+        background: '#FF8500',
+        border: '1px solid rgba(255,255,255,0.18)',
+        borderRadius: 14,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        overflow: 'hidden',
+        transition:
+          'transform 0.45s cubic-bezier(0.22,1,0.36,1), box-shadow 0.45s ease',
+      }}
     >
-      {/* Orb */}
-      <div style={{ position: 'relative', flexShrink: 0 }}>
-        <div style={{
-          position: 'absolute', inset: -10,
-          background: 'radial-gradient(circle, rgba(194,98,45,0.12), transparent 70%)',
-          borderRadius: '50%',
-          opacity: 0,
-          transition: 'opacity 0.5s',
-        }} className="orb-glow"/>
-        <div style={{
-          position: 'relative',
-          width: 54, height: 54, borderRadius: 16,
-          background: 'rgba(194,98,45,0.08)',
-          border: '1px solid rgba(194,98,45,0.22)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          {r.icon}
-        </div>
-      </div>
+      {/* Top
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+        }}
+      >
+        <span
+          style={{
+            fontFamily: "'Onest', sans-serif",
+            fontSize: 'clamp(28px, 3vw, 40px)',
+            fontWeight: 800,
+            lineHeight: 0.85,
+            letterSpacing: '-0.06em',
+            color: '#FFFFFF',
+          }}
+        >
+          {reason.num}
+        </span>
 
-      <div style={{ flex: 1 }}>
-        <h3 style={{
-          fontFamily: "'Instrument Serif', serif",
-          fontSize: 'clamp(24px,2.4vw,30px)',
-          fontWeight: 400, letterSpacing: '-0.025em', lineHeight: 1.1,
-          color: '#1A0F0A', marginBottom: 10,
-        }}>
-          {r.title}
+        <span
+          className="reason-arrow"
+          style={{
+            fontSize: 20,
+            lineHeight: 1,
+            color: '#FFFFFF',
+            opacity: 0.9,
+            transition:
+              'transform 0.4s cubic-bezier(0.22,1,0.36,1)',
+          }}
+        >
+          ↗
+        </span>
+      </div> */}
+
+      {/* Content */}
+      <div>
+        <h3
+          style={{
+            margin: 0,
+            fontFamily: "'Onest', sans-serif",
+            fontSize: 'clamp(19px, 1.7vw, 26px)',
+            fontWeight: 800,
+            lineHeight: 1,
+            letterSpacing: '-0.05em',
+            color: '#FFFFFF',
+          }}
+        >
+          {reason.title}
         </h3>
-        <p style={{ fontSize: 16, color: '#5C3D2A', lineHeight: 1.7, maxWidth: 520 }}>
-          {r.desc}
+
+        <p
+          style={{
+            margin: '13px 0 0',
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 'clamp(12px, 0.85vw, 14px)',
+            lineHeight: 1.55,
+            color: 'rgba(255,255,255,0.88)',
+          }}
+        >
+          {reason.desc}
         </p>
       </div>
 
-      <style>{`
-        .why-card:hover .orb-glow { opacity: 1; }
-      `}</style>
-    </motion.div>
+      {/* Bottom line */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 'clamp(22px, 2vw, 30px)',
+          right: 'clamp(22px, 2vw, 30px)',
+          bottom: 0,
+          height: 1,
+          background: 'rgba(255,255,255,0.22)',
+        }}
+      />
+    </motion.article>
   )
 }
 
 export default function WhyUs() {
-  const headRef = useRef(null)
-  const inView = useInView(headRef, { once: true })
+  const sectionRef = useRef(null)
+
+  const inView = useInView(sectionRef, {
+    once: true,
+    margin: '-80px',
+  })
 
   return (
     <section
       id="why-us"
       style={{
         position: 'relative',
-        padding: 'clamp(96px,11vw,160px) 0',
-        background: 'var(--bg-alt)',
+        padding: 'clamp(100px, 12vw, 160px) 0',
+        background: '#FFFFFF',
         borderTop: '1px solid var(--hair)',
+        overflow: 'hidden',
       }}
     >
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'clamp(40px,6vw,96px)', alignItems: 'start' }} className="why-grid">
-          {/* Sticky left column */}
+
+        {/* MAIN TWO-COLUMN LAYOUT */}
+        <div className="why-layout">
+
+          {/* ───────────────── LEFT ───────────────── */}
+
           <motion.div
-            ref={headRef}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22,1,0.36,1] }}
-            style={{ position: 'sticky', top: 120 }}
-            className="why-sticky"
+            ref={sectionRef}
+            initial={{
+              opacity: 0,
+              y: 30,
+            }}
+            animate={
+              inView
+                ? {
+                    opacity: 1,
+                    y: 0,
+                  }
+                : {}
+            }
+            transition={{
+              duration: 0.8,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="why-copy"
           >
-            <span className="eyebrow">Why Aumatic</span>
-            <h2 style={{
-              fontFamily: "'Instrument Serif', serif",
-              fontSize: 'clamp(40px,5.2vw,68px)',
-              fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1,
-              color: '#1A0F0A', marginTop: 16,
-            }}>
-              Built different.<br/>
-              <em style={{ color: '#C2622D' }}>Proven results.</em>
+            {/* Eyebrow */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                marginBottom: 24,
+              }}
+            >
+              <span
+                style={{
+                  width: 7,
+                  height: 7,
+                  borderRadius: '50%',
+                  background: '#FF8500',
+                  flexShrink: 0,
+                }}
+              />
+
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  color: '#FF8500',
+                }}
+              >
+                Why Aumatic
+              </span>
+            </div>
+
+            {/* Heading */}
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "'Onest', sans-serif",
+                fontSize: 'clamp(52px, 6.5vw, 88px)',
+                fontWeight: 800,
+                lineHeight: 0.88,
+                letterSpacing: '-0.075em',
+                color: '#0D0D0D',
+              }}
+            >
+              Built different.
+              <br />
+
+              <span
+                style={{
+                  color: '#FF8500',
+                }}
+              >
+                Proven results.
+              </span>
             </h2>
-            <p style={{ fontSize: 17, color: '#5C3D2A', lineHeight: 1.65, marginTop: 22, maxWidth: 380 }}>
-              We take a consultative approach so you never miss hidden opportunities or fumble implementation.
+
+            {/* Paragraph */}
+            <p
+              style={{
+                margin: 'clamp(28px, 3vw, 42px) 0 0',
+                maxWidth: 430,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 'clamp(14px, 1.1vw, 16px)',
+                lineHeight: 1.7,
+                color: '#5C3D2A',
+              }}
+            >
+              We take a consultative approach so you
+              never miss hidden opportunities or fumble
+              implementation.
             </p>
           </motion.div>
 
-          {/* Right column */}
-          <div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', columnGap: 'clamp(28px,3vw,48px)', rowGap: 0 }} className="why-list-grid">
-              {REASONS.map((r, i) => <Card key={i} r={r} i={i} />)}
-            </div>
+          {/* ───────────────── RIGHT ───────────────── */}
+
+          <div
+            className="why-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: 14,
+            }}
+          >
+            {REASONS.map((reason, index) => (
+              <ReasonCard
+                key={reason.num}
+                reason={reason}
+                index={index}
+              />
+            ))}
           </div>
+
         </div>
       </div>
 
+      {/* ───────────────── RESPONSIVE ───────────────── */}
+
       <style>{`
-        @media (max-width: 900px) {
-          .why-grid { grid-template-columns: 1fr !important; }
-          .why-sticky { position: relative !important; top: auto !important; }
-          .why-list-grid { grid-template-columns: 1fr !important; }
+
+        .why-layout {
+          display: grid;
+          grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
+          gap: clamp(50px, 8vw, 130px);
+          align-items: center;
         }
+
+        .why-copy {
+          max-width: 600px;
+        }
+
+        .why-grid {
+          width: 100%;
+          max-width: 620px;
+          margin-left: auto;
+        }
+
+        /* Card hover */
+
+        .reason-card:hover {
+          transform: translateY(-5px);
+          box-shadow:
+            0 18px 40px rgba(255, 133, 0, 0.16);
+        }
+
+        .reason-card:hover .reason-arrow {
+          transform: translate(4px, -4px);
+        }
+
+
+        /* Tablet */
+
+        @media (max-width: 1000px) {
+
+          .why-layout {
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+          }
+
+          .why-grid {
+            max-width: 100%;
+          }
+
+        }
+
+
+        /* Smaller tablet */
+
+        @media (max-width: 800px) {
+
+          .why-layout {
+            grid-template-columns: 1fr;
+            gap: 60px;
+          }
+
+          .why-copy {
+            max-width: 700px;
+          }
+
+          .why-grid {
+            max-width: 650px;
+            margin-left: 0;
+          }
+
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+          .why-layout {
+            gap: 45px;
+          }
+
+          .why-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+
+          .reason-card {
+            min-height: 240px !important;
+          }
+
+        }
+
       `}</style>
     </section>
   )

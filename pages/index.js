@@ -42,7 +42,7 @@ function Intro({ onDone }) {
         transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'absolute', width: 380, height: 380, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(194,98,45,0.22) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255,133,0,0.22) 0%, transparent 70%)',
           filter: 'blur(20px)', pointerEvents: 'none',
         }}
       />
@@ -63,7 +63,7 @@ function Intro({ onDone }) {
           fontSize: 30, fontWeight: 900, letterSpacing: -1.2,
           color: '#1A0F0A',
         }}>
-          Aumatic.<span style={{ color: '#C2622D' }}>AI</span>
+          Aumatic.<span style={{ color: '#FF8500' }}>AI</span>
         </span>
       </motion.div>
 
@@ -74,7 +74,7 @@ function Intro({ onDone }) {
         transition={{ delay: 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         style={{
           position: 'absolute', bottom: '40%', width: 'min(340px, 50vw)', height: 2,
-          background: 'linear-gradient(90deg, transparent, #C2622D, transparent)',
+          background: 'linear-gradient(90deg, transparent, #FF8500, transparent)',
           transformOrigin: 'left center',
         }}
       />
@@ -96,7 +96,7 @@ function CursorGlow() {
       left: pos.x, top: pos.y,
       width: 560, height: 560,
       transform: 'translate(-50%,-50%)',
-      background: 'radial-gradient(circle, rgba(194,98,45,0.045) 0%, transparent 60%)',
+      background: 'radial-gradient(circle, rgba(255,133,0,0.045) 0%, transparent 60%)',
       borderRadius: '50%',
       transition: 'left 0.12s cubic-bezier(0.22,1,0.36,1), top 0.12s cubic-bezier(0.22,1,0.36,1)',
       mixBlendMode: 'multiply',
@@ -124,8 +124,8 @@ function ScrollProgress() {
     }}>
       <div style={{
         width: `${v * 100}%`, height: '100%',
-        background: 'linear-gradient(90deg, #C2622D, #E8A060, #C2622D)',
-        boxShadow: '0 0 12px rgba(194,98,45,0.5)',
+        background: 'linear-gradient(90deg, #FF8500, #FFB347, #FF8500)',
+        boxShadow: '0 0 12px rgba(255,133,0,0.5)',
         transition: 'width 0.08s linear',
       }}/>
     </div>

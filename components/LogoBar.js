@@ -1,48 +1,74 @@
 import { motion } from 'framer-motion'
 
 const TOOLS = [
-  { name: 'OpenAI',     style: { fontWeight: 700, letterSpacing: -0.5 } },
-  { name: 'Claude',     style: { fontFamily: "'Instrument Serif', serif", fontWeight: 400, fontSize: 26 } },
-  { name: 'n8n',        style: { fontWeight: 800, letterSpacing: -1 } },
-  { name: 'Make',       style: { fontWeight: 700, letterSpacing: -0.4 } },
-  { name: 'Zapier',     style: { fontWeight: 700, letterSpacing: -0.3 } },
-  { name: 'HubSpot',    style: { fontWeight: 700 } },
+  { name: 'OpenAI', style: { fontWeight: 700 } },
+  { name: 'Claude', style: { fontFamily: "'Instrument Serif', serif", fontWeight: 400 } },
+  { name: 'n8n', style: { fontWeight: 800, letterSpacing: '-0.06em' } },
+  { name: 'Make', style: { fontWeight: 700 } },
+  { name: 'Zapier', style: { fontWeight: 700 } },
+  { name: 'HubSpot', style: { fontWeight: 700 } },
   { name: 'Salesforce', style: { fontWeight: 700, fontStyle: 'italic' } },
-  { name: 'Notion',     style: { fontWeight: 800, letterSpacing: -0.5 } },
-  { name: 'Slack',      style: { fontWeight: 800 } },
-  { name: 'Airtable',   style: { fontWeight: 700, letterSpacing: -0.2 } },
-  { name: 'WhatsApp',   style: { fontWeight: 700, letterSpacing: -0.2 } },
-  { name: 'Perplexity', style: { fontFamily: "'Instrument Serif', serif", fontWeight: 400, fontSize: 26 } },
-  { name: 'Google',     style: { fontWeight: 600, letterSpacing: -0.3 } },
-  { name: 'WordPress',  style: { fontWeight: 700 } },
-  { name: 'Meta',       style: { fontWeight: 800, letterSpacing: -0.5 } },
+  { name: 'Notion', style: { fontWeight: 800 } },
+  { name: 'Slack', style: { fontWeight: 800 } },
+  { name: 'Airtable', style: { fontWeight: 700 } },
+  { name: 'WhatsApp', style: { fontWeight: 700 } },
+  { name: 'Perplexity', style: { fontFamily: "'Instrument Serif', serif", fontWeight: 400 } },
+  { name: 'Google', style: { fontWeight: 600 } },
+  { name: 'WordPress', style: { fontWeight: 700 } },
+  { name: 'Meta', style: { fontWeight: 800 } },
 ]
 
 const Dot = () => (
-  <span aria-hidden="true" style={{ width: 4, height: 4, borderRadius: 99, background: 'rgba(194,98,45,0.32)', flexShrink: 0 }} />
+  <span
+    aria-hidden="true"
+    style={{
+      width: 5,
+      height: 5,
+      borderRadius: '50%',
+      background: '#FFFFFF',
+      opacity: 0.6,
+      flexShrink: 0,
+    }}
+  />
 )
 
 function Row() {
   return (
     <>
-      {TOOLS.map((t, i) => (
-        <span key={`${t.name}-${i}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 'clamp(36px,5vw,68px)' }}>
+      {TOOLS.map((tool, i) => (
+        <span
+          key={`${tool.name}-${i}`}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 'clamp(28px, 4vw, 54px)',
+          }}
+        >
           <span
             style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: 22,
-              color: '#8A6A5A',
+              fontSize: 'clamp(20px, 2vw, 28px)',
+              lineHeight: 1,
+              letterSpacing: '-0.035em',
+              color: '#FFFFFF',
               whiteSpace: 'nowrap',
-              opacity: 0.6,
-              transition: 'opacity 0.35s, color 0.35s, transform 0.35s',
+              opacity: 0.9,
+              transition: 'opacity 0.3s, transform 0.3s',
               cursor: 'default',
-              ...t.style,
+              ...tool.style,
             }}
-            onMouseEnter={e => { e.currentTarget.style.opacity = 1; e.currentTarget.style.color = '#C2622D'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-            onMouseLeave={e => { e.currentTarget.style.opacity = 0.6; e.currentTarget.style.color = '#8A6A5A'; e.currentTarget.style.transform = 'translateY(0)' }}
+            onMouseEnter={e => {
+              e.currentTarget.style.opacity = '0.55'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.opacity = '0.9'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
           >
-            {t.name}
+            {tool.name}
           </span>
+
           <Dot />
         </span>
       ))}
@@ -55,37 +81,114 @@ export default function LogoBar() {
     <section
       style={{
         position: 'relative',
-        padding: 'clamp(40px,5vw,64px) 0',
-        background: 'var(--bg)',
-        borderTop: '1px solid var(--hair)',
-        borderBottom: '1px solid var(--hair)',
+        padding: 'clamp(52px, 7vw, 82px) 0',
+        background: '#FF8500',
+        borderTop: '1px solid rgba(255,255,255,0.22)',
+        borderBottom: '1px solid rgba(255,255,255,0.22)',
         overflow: 'hidden',
       }}
     >
+      {/* Simple heading */}
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.7 }}
+        transition={{
+          duration: 0.7,
+          ease: [0.22, 1, 0.36, 1],
+        }}
         style={{
-          maxWidth: 'var(--container)', margin: '0 auto 28px',
-          padding: '0 clamp(20px,3vw,40px)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14,
+          maxWidth: 'var(--container)',
+          margin: '0 auto',
+          padding: '0 clamp(20px, 5vw, 72px)',
+          marginBottom: 'clamp(34px, 4vw, 48px)',
         }}
       >
-        <span style={{ height: 1, flex: 1, maxWidth: 110, background: 'linear-gradient(90deg, transparent, var(--hair-strong))' }} />
-        <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2.4, textTransform: 'uppercase', color: '#8A6A5A' }}>
-          Tools we ship with daily
-        </span>
-        <span style={{ height: 1, flex: 1, maxWidth: 110, background: 'linear-gradient(90deg, var(--hair-strong), transparent)' }} />
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            marginBottom: 18,
+          }}
+        >
+          <span
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: '50%',
+              background: '#FFFFFF',
+            }}
+          />
+
+          <span
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: '#FFFFFF',
+            }}
+          >
+            Our Stack
+          </span>
+        </div>
+
+        <h2
+          style={{
+            margin: 0,
+            maxWidth: 700,
+            fontFamily: "'Onest', sans-serif",
+            fontSize: 'clamp(38px, 5vw, 68px)',
+            fontWeight: 800,
+            lineHeight: 0.92,
+            letterSpacing: '-0.065em',
+            color: '#FFFFFF',
+          }}
+        >
+          The tools behind
+          <br />
+          <em
+            style={{
+              fontStyle: 'normal',
+              fontFamily: "'Instrument Serif', serif",
+              fontWeight: 400,
+            }}
+          >
+            what we build.
+          </em>
+        </h2>
       </motion.div>
 
-      <div className="marquee" style={{ paddingBlock: 12 }}>
-        <div className="marquee-track" style={{ alignItems: 'center', gap: 'clamp(36px,5vw,68px)' }}>
+      {/* Marquee */}
+      <div
+        className="marquee"
+        style={{
+          padding: '24px 0',
+          borderTop: '1px solid rgba(255,255,255,0.25)',
+          borderBottom: '1px solid rgba(255,255,255,0.25)',
+        }}
+      >
+        <div
+          className="marquee-track"
+          style={{
+            alignItems: 'center',
+            gap: 'clamp(28px, 4vw, 54px)',
+          }}
+        >
           <Row />
           <Row />
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 600px) {
+          .marquee {
+            padding: 20px 0 !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

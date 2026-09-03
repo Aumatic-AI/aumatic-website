@@ -1,433 +1,1153 @@
-import { useRef, useState, useEffect } from 'react'
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion'
+'use client'
 
-/* ──────────────────────────────────────────────────────────────
-   Brand logos via Iconify CDN — official brand SVGs in their
-   real colors.  `slug` = "prefix:name" on iconify; `tint` is
-   the fallback card accent if the SVG ever 404s.
-   ────────────────────────────────────────────────────────────── */
+import { useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const iconUrl = (slug) => `https://api.iconify.design/${slug}.svg`
-
-const Icon = ({ children }) => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    {children}
-  </svg>
-)
+gsap.registerPlugin(ScrollTrigger)
 
 const CATS = [
   {
+    num: '01',
     title: 'AI & Machine Learning',
-    summary: 'Custom LLM agents, RAG pipelines, and vision systems tuned to your domain data.',
+    summary:
+      'Custom LLM agents, RAG pipelines, and vision systems tuned to your domain data.',
     tools: [
-      { name: 'OpenAI',       slug: 'logos:openai',            tint: '#10A37F' },
-      { name: 'Claude',       slug: 'logos:claude',            tint: '#D97757' },
-      { name: 'Gemini',       slug: 'logos:google-gemini',     tint: '#8E75B2' },
-      { name: 'Hugging Face', slug: 'logos:hugging-face-icon', tint: '#FFD21E' },
-      { name: 'TensorFlow',   slug: 'logos:tensorflow',        tint: '#FF6F00' },
+      { name: 'OpenAI', slug: 'logos:openai' },
+      { name: 'Claude', slug: 'logos:claude' },
+      { name: 'Gemini', slug: 'logos:google-gemini' },
+      { name: 'Hugging Face', slug: 'logos:hugging-face-icon' },
+      { name: 'TensorFlow', slug: 'logos:tensorflow' },
     ],
-    icon: <Icon><path d="M12 2a4 4 0 0 1 4 4v.5"/><path d="M12 2a4 4 0 0 0-4 4v.5"/><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M9 16h6M9 8h6"/></Icon>,
-    featured: true,
   },
   {
+    num: '02',
     title: 'Automation Platforms',
-    summary: 'Visual and code-driven orchestration across every tool you use.',
+    summary:
+      'Visual and code-driven orchestration across every tool you use.',
     tools: [
-      { name: 'Make',           slug: 'simple-icons:make',     tint: '#6D00CC' },
-      { name: 'n8n',            slug: 'simple-icons:n8n',      tint: '#EA4B71' },
-      { name: 'Zapier',         slug: 'logos:zapier-icon',     tint: '#FF4F00' },
-      { name: 'IFTTT',          slug: 'logos:ifttt',           tint: '#000000' },
-      { name: 'GitHub Actions', slug: 'logos:github-actions',  tint: '#2088FF' },
+      { name: 'Make', slug: 'simple-icons:make' },
+      { name: 'n8n', slug: 'simple-icons:n8n' },
+      { name: 'Zapier', slug: 'logos:zapier-icon' },
+      { name: 'IFTTT', slug: 'logos:ifttt' },
+      { name: 'GitHub Actions', slug: 'logos:github-actions' },
     ],
-    icon: <Icon><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></Icon>,
   },
   {
+    num: '03',
     title: 'CRM & Operations',
-    summary: 'Lifecycle, pipeline, and ops automation across the major CRMs.',
+    summary:
+      'Lifecycle, pipeline, and ops automation across the major CRMs.',
     tools: [
-      { name: 'HubSpot',    slug: 'logos:hubspot',      tint: '#FF7A59' },
-      { name: 'Salesforce', slug: 'logos:salesforce',   tint: '#00A1E0' },
-      { name: 'Pipedrive',  slug: 'logos:pipedrive',    tint: '#017737' },
-      { name: 'Monday',     slug: 'logos:monday-icon',  tint: '#FF3D57' },
-      { name: 'Airtable',   slug: 'logos:airtable',     tint: '#18BFFF' },
+      { name: 'HubSpot', slug: 'logos:hubspot' },
+      { name: 'Salesforce', slug: 'logos:salesforce' },
+      { name: 'Pipedrive', slug: 'logos:pipedrive' },
+      { name: 'Monday', slug: 'logos:monday-icon' },
+      { name: 'Airtable', slug: 'logos:airtable' },
     ],
-    icon: <Icon><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></Icon>,
   },
   {
+    num: '04',
     title: 'Engineering',
-    summary: 'Production-grade backends in TypeScript and Python with real test coverage.',
+    summary:
+      'Production-grade backends in TypeScript and Python with real test coverage.',
     tools: [
-      { name: 'TypeScript', slug: 'logos:typescript-icon', tint: '#3178C6' },
-      { name: 'Python',     slug: 'logos:python',          tint: '#3776AB' },
-      { name: 'GraphQL',    slug: 'logos:graphql',         tint: '#E535AB' },
-      { name: 'Node.js',    slug: 'logos:nodejs-icon',     tint: '#339933' },
-      { name: 'Docker',     slug: 'logos:docker-icon',     tint: '#2496ED' },
+      { name: 'TypeScript', slug: 'logos:typescript-icon' },
+      { name: 'Python', slug: 'logos:python' },
+      { name: 'GraphQL', slug: 'logos:graphql' },
+      { name: 'Node.js', slug: 'logos:nodejs-icon' },
+      { name: 'Docker', slug: 'logos:docker-icon' },
     ],
-    icon: <Icon><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></Icon>,
   },
   {
+    num: '05',
     title: 'Business Tools',
-    summary: 'Slack-first, Notion-first, Drive-first — we live inside your stack.',
+    summary:
+      'Slack-first, Notion-first, Drive-first — we live inside your stack.',
     tools: [
-      { name: 'Slack',     slug: 'logos:slack-icon',      tint: '#611F69' },
-      { name: 'Notion',    slug: 'logos:notion-icon',     tint: '#1A0F0A' },
-      { name: 'Google',    slug: 'logos:google-icon',     tint: '#4285F4' },
-      { name: 'Microsoft', slug: 'logos:microsoft-icon',  tint: '#0078D4' },
-      { name: 'Asana',     slug: 'logos:asana-icon',      tint: '#F06A6A' },
+      { name: 'Slack', slug: 'logos:slack-icon' },
+      { name: 'Notion', slug: 'logos:notion-icon' },
+      { name: 'Google', slug: 'logos:google-icon' },
+      { name: 'Microsoft', slug: 'logos:microsoft-icon' },
+      { name: 'Asana', slug: 'logos:asana-icon' },
     ],
-    icon: <Icon><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></Icon>,
   },
   {
+    num: '06',
     title: 'Data & Analytics',
-    summary: 'Warehouses, dashboards, and the modeling layer behind every decision.',
+    summary:
+      'Warehouses, dashboards, and the modeling layer behind every decision.',
     tools: [
-      { name: 'BigQuery',  slug: 'simple-icons:googlebigquery', tint: '#4285F4' },
-      { name: 'Snowflake', slug: 'logos:snowflake-icon',        tint: '#29B5E8' },
-      { name: 'Power BI',  slug: 'logos:microsoft-power-bi',    tint: '#E5A50A' },
-      { name: 'Looker',    slug: 'logos:looker-icon',           tint: '#5945ED' },
-      { name: 'dbt',       slug: 'logos:dbt-icon',              tint: '#FF694A' },
+      { name: 'BigQuery', slug: 'simple-icons:googlebigquery' },
+      { name: 'Snowflake', slug: 'logos:snowflake-icon' },
+      { name: 'Power BI', slug: 'logos:microsoft-power-bi' },
+      { name: 'Looker', slug: 'logos:looker-icon' },
+      { name: 'dbt', slug: 'logos:dbt-icon' },
     ],
-    icon: <Icon><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></Icon>,
   },
 ]
 
-/* ── Logo card — single mini card with brand logo + name ───── */
-function LogoCard({ tool, w, h }) {
-  const [errored, setErrored] = useState(false)
+const iconUrl = (slug) =>
+  `https://api.iconify.design/${slug}.svg`
+
+function CapabilityCard({ item, index }) {
   return (
-    <div style={{
-      width: w, height: h,
-      background: '#FFFFFF',
-      borderRadius: 14,
-      border: '1px solid rgba(20,16,12,0.08)',
-      boxShadow: '0 1px 1px rgba(20,16,12,0.04), 0 12px 28px rgba(20,16,12,0.14), 0 4px 8px rgba(20,16,12,0.06)',
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      gap: 6,
-      padding: '10px 6px 8px',
-      position: 'relative', overflow: 'hidden',
-    }}>
-      {/* Subtle tint accent at top */}
-      <span style={{
-        position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-        background: `linear-gradient(90deg, transparent, ${tool.tint}, transparent)`,
-        opacity: 0.7,
-      }} />
-      {/* Logo */}
-      <div style={{ width: w * 0.5, height: w * 0.5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {!errored ? (
-          <img
-            src={iconUrl(tool.slug)}
-            alt={tool.name}
-            width={Math.floor(w * 0.5)}
-            height={Math.floor(w * 0.5)}
-            style={{ display: 'block', objectFit: 'contain', userSelect: 'none' }}
-            draggable={false}
-            loading="lazy"
-            onError={() => setErrored(true)}
-          />
-        ) : (
-          <div style={{
-            width: w * 0.5, height: w * 0.5, borderRadius: 99,
-            background: `linear-gradient(135deg, ${tool.tint}, ${tool.tint}DD)`,
-            color: '#FFF', fontWeight: 700, fontSize: 12,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            {tool.name.slice(0, 2).toUpperCase()}
-          </div>
-        )}
+    <div
+      className="cap-stack-card"
+      style={{
+        zIndex: index + 1,
+      }}
+    >
+      <div className="cap-card-number">
+        {item.num}
       </div>
-      {/* Name */}
-      <span style={{
-        fontFamily: "'Inter', sans-serif",
-        fontSize: 10, fontWeight: 600,
-        color: '#1A0F0A',
-        letterSpacing: 0.1,
-        textAlign: 'center',
-        whiteSpace: 'nowrap',
-        maxWidth: '100%',
-        overflow: 'hidden', textOverflow: 'ellipsis',
-      }}>
-        {tool.name}
+
+      <div className="cap-card-content">
+        <h3>{item.title}</h3>
+
+        <p>{item.summary}</p>
+
+        <div className="cap-tools">
+          {item.tools.map((tool) => (
+            <span
+              key={tool.name}
+              className="cap-tool"
+            >
+              <img
+                src={iconUrl(tool.slug)}
+                alt=""
+                width="16"
+                height="16"
+              />
+
+              {tool.name}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <span className="cap-card-arrow">
+        ↗
       </span>
     </div>
   )
 }
 
-/* ── Fan-out stack — hidden at rest. On hover, cards rise from
-       behind the card content and fan across the top with ~20%
-       overlap.  Center card emerges first, outers stagger out. ── */
-function FanStack({ tools, hovered, featured }) {
-  const total = tools.length
-  // Card dimensions
-  const w = featured ? 92 : 78
-  const h = featured ? 140 : 124
-  // Spacing < card width gives the desired light overlap (~20%)
-  const spacing = featured ? 74 : 62
-  // How high the cards travel up from the anchor on hover.
-  // Tuned so the cards' bottom edges sit just above the article's
-  // top edge — they emerge from behind it and float "lifted" above
-  // the title area instead of covering it.
-  const riseY = featured ? -260 : -255
-
-  return (
-    <div style={{
-      position: 'absolute',
-      bottom: featured ? 34 : 28,
-      left: '50%',
-      width: 0, height: 0,
-      transformStyle: 'preserve-3d',
-      pointerEvents: 'none',
-    }}>
-      {tools.map((tool, i) => {
-        const mid = (total - 1) / 2
-        const off = i - mid                          // -2 … +2 for 5 cards
-        const offX = off * spacing                   // horizontal fan position
-        const arcY = Math.pow(Math.abs(off), 1.6) * 4 // gentle arc dip — outers slightly lower
-        const tilt = off * 7                          // outward rotation
-
-        // Stagger: center card first, then outward (-2,+2 last)
-        const distFromCenter = Math.abs(off)
-        const inDelay  = 0.05 + distFromCenter * 0.06
-        const outDelay = distFromCenter * 0.02
-
-        return (
-          <motion.div
-            key={tool.name}
-            initial={{ x: 0, y: 0, rotate: 0, scale: 0.5, opacity: 0 }}
-            animate={hovered
-              ? { x: offX, y: riseY + arcY, rotate: tilt, scale: 1,    opacity: 1 }
-              : { x: 0,    y: 0,            rotate: 0,    scale: 0.5,  opacity: 0 }}
-            transition={hovered
-              ? { type: 'spring', stiffness: 260, damping: 22, mass: 0.75, delay: inDelay }
-              : { type: 'spring', stiffness: 320, damping: 28, mass: 0.6,  delay: outDelay }}
-            style={{
-              position: 'absolute',
-              bottom: 0, left: 0,
-              marginLeft: -w / 2,
-              transformOrigin: 'center 100%',
-              willChange: 'transform, opacity',
-              // Center card highest, outers behind — feels like a hand of cards
-              zIndex: 100 - Math.round(Math.abs(off) * 10),
-            }}
-          >
-            <LogoCard tool={tool} w={w} h={h} />
-          </motion.div>
-        )
-      })}
-    </div>
-  )
-}
-
-/* ── The 3D-tilt capability card ────────────────────────────── */
-function CapCard({ c, i, featured }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-40px' })
-  const [hovered, setHovered] = useState(false)
-
-  // Mouse-tracked tilt
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const sx = useSpring(mx, { stiffness: 180, damping: 18, mass: 0.4 })
-  const sy = useSpring(my, { stiffness: 180, damping: 18, mass: 0.4 })
-  const rotateY = useTransform(sx, [-0.5, 0.5], [-9, 9])
-  const rotateX = useTransform(sy, [-0.5, 0.5], [7, -7])
-  const liftZ  = useTransform(sx, [-0.5, 0.5, 1.5], [0, 0, 0])  // placeholder
-
-  const onMove = (e) => {
-    const el = ref.current; if (!el) return
-    const r = el.getBoundingClientRect()
-    mx.set((e.clientX - r.left) / r.width - 0.5)
-    my.set((e.clientY - r.top) / r.height - 0.5)
-  }
-  const onLeave = () => { mx.set(0); my.set(0); setHovered(false) }
-
-  return (
-    <div
-      ref={ref}
-      onMouseEnter={() => setHovered(true)}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      style={{
-        gridColumn: featured ? 'span 2' : 'span 1',
-        perspective: 1100,
-        position: 'relative',
-        zIndex: hovered ? 30 : 1,
-      }}
-    >
-      {/* ── BACK LAYER — fan cards live BEHIND the article.  At rest
-            they sit at the bottom of the wrapper, fully occluded by
-            the article's opaque background.  On hover they rise
-            upward and emerge from behind the article's top edge. ── */}
-      <div style={{
-        position: 'absolute',
-        inset: 0,
-        zIndex: 0,
-        pointerEvents: 'none',
-      }}>
-        <FanStack tools={c.tools} hovered={hovered} featured={featured} />
-      </div>
-
-      <motion.article
-        initial={{ opacity: 0, y: 22 }}
-        animate={inView ? { opacity: 1, y: 0, scale: hovered ? 1.025 : 1 } : { opacity: 0, y: 22 }}
-        transition={{
-          opacity: { duration: 0.65, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] },
-          y:       { duration: 0.65, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] },
-          scale:   { duration: 0.5,  ease: [0.22, 1, 0.36, 1] },
-        }}
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          // Opaque background — occludes the fan layer behind it at rest
-          background: featured ? 'linear-gradient(170deg, #FBF6EE 0%, #F0E2CC 100%)' : 'var(--bg-card)',
-          border: '1px solid',
-          borderColor: hovered ? 'rgba(194,98,45,0.36)' : 'var(--hair-warm)',
-          borderRadius: 'var(--radius-lg)',
-          padding: 'clamp(24px,2.6vw,32px)',
-          minHeight: 268,
-          boxShadow: hovered
-            ? '0 28px 64px rgba(194,98,45,0.18), 0 8px 18px rgba(20,16,12,0.08)'
-            : '0 1px 2px rgba(20,16,12,0.04)',
-          rotateX, rotateY,
-          transformStyle: 'preserve-3d',
-          transition: 'border-color 0.45s, box-shadow 0.45s',
-          willChange: 'transform',
-        }}
-      >
-        {/* Featured corner glow (contained) */}
-        {featured && (
-          <div style={{
-            position: 'absolute', inset: 0, borderRadius: 'var(--radius-lg)',
-            overflow: 'hidden', pointerEvents: 'none',
-          }}>
-            <div style={{
-              position: 'absolute', top: -60, right: -60, width: 240, height: 240, borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(194,98,45,0.18), transparent 70%)',
-            }} />
-          </div>
-        )}
-
-        {/* Specular sheen — moves with tilt for that "glass" 3D feel */}
-        <motion.div
-          style={{
-            position: 'absolute', inset: 0, borderRadius: 'var(--radius-lg)',
-            background: 'linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%)',
-            opacity: useTransform(sx, [-0.5, 0, 0.5], [0.6, 0, 0.6]),
-            pointerEvents: 'none',
-            mixBlendMode: 'overlay',
-          }}
-        />
-
-        {/* Content — bumped forward on Z for parallax depth */}
-        <div style={{ position: 'relative', zIndex: 2, transform: 'translateZ(28px)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 16 }}>
-            <div style={{
-              width: 46, height: 46, borderRadius: 13,
-              background: 'rgba(194,98,45,0.08)',
-              border: '1px solid rgba(194,98,45,0.18)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: '#C2622D', flexShrink: 0,
-            }}>
-              {c.icon}
-            </div>
-            <h3 style={{
-              fontFamily: "'Instrument Serif', serif",
-              fontSize: featured ? 'clamp(26px,2.6vw,32px)' : 'clamp(20px,1.8vw,23px)',
-              fontWeight: 400, letterSpacing: '-0.025em', lineHeight: 1.1,
-              color: '#1A0F0A',
-            }}>
-              {c.title}
-            </h3>
-          </div>
-
-          <motion.p
-            animate={{ opacity: hovered ? 0.35 : 1 }}
-            transition={{ duration: 0.45, ease: [0.22,1,0.36,1] }}
-            style={{
-              fontSize: 14.5, color: '#5C3D2A', lineHeight: 1.7,
-              marginBottom: 18,
-              maxWidth: featured ? 460 : 'auto',
-            }}
-          >
-            {c.summary}
-          </motion.p>
-
-          {/* Hover hint — invites the reveal */}
-          <motion.div
-            animate={{
-              opacity: hovered ? 0 : 1,
-              y: hovered ? -4 : 0,
-            }}
-            transition={{ duration: 0.35, ease: [0.22,1,0.36,1] }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: 8,
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 11, fontWeight: 600,
-              letterSpacing: 1.8, textTransform: 'uppercase',
-              color: '#C2622D',
-            }}
-          >
-            <span style={{ width: 18, height: 1, background: 'linear-gradient(90deg, transparent, #C2622D)' }} />
-            {c.tools.length} tools · hover to reveal
-          </motion.div>
-        </div>
-      </motion.article>
-    </div>
-  )
-}
-
 export default function Capabilities() {
+  const sectionRef = useRef(null)
+  const stackRef = useRef(null)
   const headRef = useRef(null)
-  const inView = useInView(headRef, { once: true })
+
+  const inView = useInView(headRef, {
+    once: true,
+    margin: '-80px',
+  })
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const stack = stackRef.current
+
+    if (!section || !stack) return
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray('.cap-stack-card')
+
+      if (!cards.length) return
+
+      const prefersReducedMotion =
+        window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches
+
+      /*
+       * Every card begins underneath the visible card.
+       *
+       * The important part here is that we DON'T scale the cards.
+       * They simply travel vertically upward and cover the previous
+       * card, matching the reference effect.
+       *
+       * This offset is in viewport height, not card height — the
+       * stack container is only one viewport tall, so a card needs
+       * to move down by (at least) 100vh to be fully hidden below
+       * it, regardless of the card's own (usually much shorter)
+       * height. A plain `yPercent` (relative to the card's own
+       * height) left a chunk of the incoming card peeking in at the
+       * bottom before its transition even started.
+       */
+      gsap.set(cards, {
+        y: '108vh',
+        scale: 1,
+        force3D: true,
+        transformOrigin: 'center center',
+      })
+
+      /*
+       * First card starts fully visible.
+       */
+      gsap.set(cards[0], {
+        y: 0,
+        scale: 1,
+      })
+
+      /*
+       * Respect reduced-motion preferences.
+       */
+      if (prefersReducedMotion) {
+        gsap.set(cards, {
+          y: 0,
+          scale: 1,
+        })
+
+        return
+      }
+
+      /*
+       * Each card gets roughly one viewport of scroll distance.
+       *
+       * This is deliberately independent from the physical height
+       * of the stack so the animation remains consistent across
+       * desktop, tablet and mobile.
+       */
+      const transitionDistance = () =>
+        Math.max(window.innerHeight * 0.92, 520)
+
+      const tl = gsap.timeline({
+        defaults: {
+          ease: 'none',
+        },
+
+        scrollTrigger: {
+          trigger: stack,
+
+          /*
+           * Start a little before the stack's top actually
+           * reaches the top of the viewport, so the overlap
+           * animation is already under way by the time it
+           * locks into its pinned position instead of pinning
+           * first and only then starting to move.
+           */
+          start: 'top 8%',
+
+          end: () =>
+            `+=${transitionDistance() * (cards.length - 1)}`,
+
+          scrub: true,
+
+          pin: true,
+
+          pinSpacing: true,
+
+          anticipatePin: 1,
+
+          invalidateOnRefresh: true,
+        },
+      })
+
+      /*
+       * Animate each card vertically into place.
+       *
+       * Card 01 is already visible.
+       *
+       * Card 02:
+       *   starts below Card 01
+       *   moves vertically upward
+       *   covers Card 01
+       *
+       * Card 03 then does the same to Card 02, etc.
+       */
+      cards.slice(1).forEach((card) => {
+        /*
+         * Small pause before the next card begins moving.
+         * This gives each transition a little weight.
+         */
+        tl.to({}, {
+          duration: 0.08,
+        })
+
+        tl.to(card, {
+          y: 0,
+          duration: 0.92,
+        })
+      })
+
+      /*
+       * Refresh after layout has settled.
+       */
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh()
+      })
+    }, section)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
     <section
+      ref={sectionRef}
       id="capabilities"
-      style={{
-        position: 'relative',
-        padding: 'clamp(96px,11vw,160px) 0',
-        background: 'var(--bg)',
-        borderTop: '1px solid var(--hair)',
-      }}
+      className="capabilities-section"
     >
       <div className="container">
+
+        {/* HEADER */}
+
         <motion.div
           ref={headRef}
-          initial={{ opacity: 0, y: 28 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          style={{ textAlign: 'center', marginBottom: 'clamp(48px,6vw,72px)' }}
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          animate={
+            inView
+              ? {
+                  opacity: 1,
+                  y: 0,
+                }
+              : {}
+          }
+          transition={{
+            duration: 0.8,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="cap-header"
         >
-          <span className="eyebrow">Capabilities</span>
-          <h2 style={{
-            fontFamily: "'Instrument Serif', serif",
-            fontSize: 'clamp(40px,5.2vw,68px)',
-            fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1,
-            color: '#1A0F0A', marginTop: 18,
-          }}>
-            Platform-agnostic. <em style={{ color: '#C2622D' }}>Outcome-obsessed.</em>
-          </h2>
-          <p style={{ fontSize: 17, color: '#5C3D2A', lineHeight: 1.65, maxWidth: 520, margin: '20px auto 0' }}>
-            We don't sell tools — we choose the right ones for your problem and ship the system that uses them. Hover any card to fan out the stack.
+          <div>
+            <div className="cap-label">
+              <span />
+              <span>Capabilities</span>
+            </div>
+
+            <h2>
+              Systems built
+              <br />
+              <span>around you.</span>
+            </h2>
+          </div>
+
+          <p>
+            We don't sell tools. We combine the right
+            technologies to build intelligent systems
+            around the way your business actually works.
           </p>
         </motion.div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 'clamp(16px,1.6vw,20px)',
-          isolation: 'isolate',
-        }} className="cap-grid">
-          {CATS.map((c, i) => (
-            <CapCard key={i} c={c} i={i} featured={!!c.featured} />
+
+        {/* STACK */}
+
+        <div
+          ref={stackRef}
+          className="cap-stack"
+        >
+          {CATS.map((item, index) => (
+            <CapabilityCard
+              key={item.num}
+              item={item}
+              index={index}
+            />
           ))}
         </div>
+
       </div>
 
-      <style>{`
-        @media (max-width: 1024px) { .cap-grid { grid-template-columns: 1fr 1fr !important; } .cap-grid > * { grid-column: span 1 !important; } }
-        @media (max-width: 720px)  { .cap-grid { grid-template-columns: 1fr !important; } }
+
+      <style jsx global>{`
+
+        /* ═══════════════════════════════════════════════
+           SECTION
+        ═══════════════════════════════════════════════ */
+
+        .capabilities-section {
+          position: relative;
+          width: 100%;
+          padding: clamp(90px, 12vw, 170px) 0;
+          background: #ffffff;
+          border-top: 1px solid var(--hair);
+          overflow: visible;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           HEADER
+        ═══════════════════════════════════════════════ */
+
+        .cap-header {
+          display: grid;
+
+          grid-template-columns:
+            minmax(0, 1fr)
+            minmax(280px, 0.55fr);
+
+          gap: clamp(40px, 8vw, 120px);
+
+          align-items: end;
+
+          margin-bottom: clamp(
+            60px,
+            8vw,
+            110px
+          );
+        }
+
+
+        .cap-label {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 24px;
+        }
+
+
+        .cap-label span:first-child {
+          width: 7px;
+          height: 7px;
+
+          flex: 0 0 7px;
+
+          border-radius: 50%;
+
+          background: #ff8500;
+        }
+
+
+        .cap-label span:last-child {
+          font-family: 'Inter', sans-serif;
+
+          font-size: 10px;
+
+          font-weight: 700;
+
+          letter-spacing: 0.14em;
+
+          text-transform: uppercase;
+
+          color: #ff8500;
+        }
+
+
+        .cap-header h2 {
+          margin: 0;
+
+          font-family: 'Onest', sans-serif;
+
+          font-size: clamp(
+            48px,
+            7vw,
+            96px
+          );
+
+          font-weight: 800;
+
+          line-height: 0.88;
+
+          letter-spacing: -0.075em;
+
+          color: #0d0d0d;
+        }
+
+
+        .cap-header h2 span {
+          color: #ff8500;
+        }
+
+
+        .cap-header p {
+          margin: 0;
+
+          max-width: 380px;
+
+          font-family: 'Inter', sans-serif;
+
+          font-size: clamp(
+            14px,
+            1.25vw,
+            16px
+          );
+
+          line-height: 1.7;
+
+          color: #5c3d2a;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           STACK
+        ═══════════════════════════════════════════════ */
+
+        .cap-stack {
+          position: relative;
+
+          /*
+           * The stack itself is only one viewport tall.
+           *
+           * ScrollTrigger handles the extra scroll distance
+           * while the stack is pinned.
+           */
+          height: calc(100vh + 1px);
+
+          overflow: visible;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           CARDS
+        ═══════════════════════════════════════════════ */
+
+        .cap-stack-card {
+          position: absolute;
+
+          top: 0;
+          left: 0;
+
+          width: 100%;
+
+          height: min(
+            68vh,
+            720px
+          );
+
+          min-height: 520px;
+
+          display: grid;
+
+          grid-template-columns:
+            clamp(60px, 8vw, 110px)
+            minmax(0, 1fr)
+            minmax(240px, 0.75fr);
+
+          gap: clamp(
+            20px,
+            4vw,
+            70px
+          );
+
+          align-items: start;
+
+          padding: clamp(
+            38px,
+            5vw,
+            70px
+          );
+
+          border-radius: clamp(
+            28px,
+            3vw,
+            42px
+          );
+
+          background: #f5efe8;
+
+          border: 1px solid
+            rgba(13, 13, 13, 0.08);
+
+          box-shadow:
+            0 20px 70px
+            rgba(20, 16, 12, 0.14);
+
+          overflow: hidden;
+
+          /*
+           * Critical for smooth scroll-driven movement.
+           */
+          will-change: transform;
+
+          transform: translateZ(0);
+
+          backface-visibility: hidden;
+        }
+
+
+        /*
+         * Different card tones.
+         */
+
+        .cap-stack-card:nth-child(2) {
+          background: #f2ebe3;
+        }
+
+
+        .cap-stack-card:nth-child(3) {
+          background: #f7f0e9;
+        }
+
+
+        .cap-stack-card:nth-child(4) {
+          background: #f1e9e1;
+        }
+
+
+        .cap-stack-card:nth-child(5) {
+          background: #f6eee7;
+        }
+
+
+        .cap-stack-card:nth-child(6) {
+          background: #efe7df;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           NUMBER
+        ═══════════════════════════════════════════════ */
+
+        .cap-card-number {
+          font-family: 'Onest', sans-serif;
+
+          font-size: clamp(
+            18px,
+            1.5vw,
+            22px
+          );
+
+          font-weight: 700;
+
+          letter-spacing: -0.04em;
+
+          color: #ff8500;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           CONTENT
+        ═══════════════════════════════════════════════ */
+
+        .cap-card-content {
+          min-width: 0;
+
+          height: 100%;
+
+          display: flex;
+
+          flex-direction: column;
+        }
+
+
+        .cap-card-content h3 {
+          margin: 0;
+
+          max-width: 720px;
+
+          font-family: 'Onest', sans-serif;
+
+          font-size: clamp(
+            40px,
+            5vw,
+            76px
+          );
+
+          font-weight: 800;
+
+          line-height: 0.92;
+
+          letter-spacing: -0.06em;
+
+          color: #0d0d0d;
+
+          overflow-wrap: break-word;
+        }
+
+
+        .cap-card-content p {
+          margin: auto 0 0;
+
+          max-width: 470px;
+
+          font-family: 'Inter', sans-serif;
+
+          font-size: clamp(
+            14px,
+            1.2vw,
+            18px
+          );
+
+          line-height: 1.65;
+
+          color: #5c3d2a;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           TOOLS
+        ═══════════════════════════════════════════════ */
+
+        .cap-tools {
+          display: flex;
+
+          flex-wrap: wrap;
+
+          gap: 9px 16px;
+
+          margin-top: 24px;
+        }
+
+
+        .cap-tool {
+          display: inline-flex;
+
+          align-items: center;
+
+          gap: 7px;
+
+          font-family: 'Inter', sans-serif;
+
+          font-size: 11px;
+
+          font-weight: 600;
+
+          color: #0d0d0d;
+
+          opacity: 0.65;
+
+          white-space: nowrap;
+        }
+
+
+        .cap-tool img {
+          display: block;
+
+          width: 16px;
+          height: 16px;
+
+          object-fit: contain;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           ARROW
+        ═══════════════════════════════════════════════ */
+
+        .cap-card-arrow {
+          position: absolute;
+
+          top: clamp(
+            26px,
+            4vw,
+            40px
+          );
+
+          right: clamp(
+            26px,
+            4vw,
+            40px
+          );
+
+          font-family: 'Inter', sans-serif;
+
+          font-size: clamp(
+            22px,
+            2vw,
+            28px
+          );
+
+          line-height: 1;
+
+          color: #ff8500;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           LARGE TABLET
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 1100px) {
+
+          .cap-header {
+            grid-template-columns:
+              1fr
+              0.65fr;
+
+            gap: 50px;
+          }
+
+
+          .cap-stack {
+            height: calc(100vh + 1px);
+          }
+
+
+          .cap-stack-card {
+            height: min(
+              66vh,
+              680px
+            );
+
+            grid-template-columns:
+              55px
+              minmax(0, 1fr)
+              minmax(190px, 0.7fr);
+
+            gap: 28px;
+
+            padding: 42px;
+          }
+
+
+          .cap-card-content h3 {
+            font-size: clamp(
+              38px,
+              5.5vw,
+              64px
+            );
+          }
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           TABLET
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 850px) {
+
+          .capabilities-section {
+            padding: 100px 0;
+          }
+
+
+          .cap-header {
+            grid-template-columns: 1fr;
+
+            gap: 30px;
+
+            margin-bottom: 65px;
+          }
+
+
+          .cap-header p {
+            max-width: 560px;
+          }
+
+
+          .cap-stack {
+            height: calc(100vh + 1px);
+          }
+
+
+          .cap-stack-card {
+            height: 64vh;
+
+            min-height: 500px;
+
+            grid-template-columns:
+              50px
+              minmax(0, 1fr);
+
+            gap: 24px;
+
+            padding: 36px;
+
+            border-radius: 32px;
+          }
+
+
+          .cap-card-content {
+            grid-column: 2;
+          }
+
+
+          .cap-card-content h3 {
+            max-width: 600px;
+
+            font-size: clamp(
+              38px,
+              7.5vw,
+              60px
+            );
+          }
+
+
+          .cap-card-content p {
+            margin-top: 45px;
+          }
+
+
+          .cap-card-arrow {
+            top: 30px;
+            right: 30px;
+          }
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           MOBILE
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 560px) {
+
+          .capabilities-section {
+            padding: 82px 0 90px;
+          }
+
+
+          .cap-header {
+            gap: 26px;
+
+            margin-bottom: 52px;
+          }
+
+
+          .cap-label {
+            gap: 8px;
+
+            margin-bottom: 19px;
+          }
+
+
+          .cap-label span:first-child {
+            width: 6px;
+            height: 6px;
+
+            flex-basis: 6px;
+          }
+
+
+          .cap-label span:last-child {
+            font-size: 9px;
+          }
+
+
+          .cap-header h2 {
+            font-size: clamp(
+              46px,
+              13vw,
+              62px
+            );
+
+            line-height: 0.9;
+          }
+
+
+          .cap-header p {
+            max-width: 100%;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+          }
+
+
+          .cap-stack {
+            height: calc(100vh + 1px);
+          }
+
+
+          /* CARD */
+
+          .cap-stack-card {
+            height: 67vh;
+
+            min-height: 470px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 22px;
+
+            padding: 27px;
+
+            border-radius: 26px;
+          }
+
+
+          /* NUMBER */
+
+          .cap-card-number {
+            font-size: 16px;
+          }
+
+
+          /* CONTENT */
+
+          .cap-card-content {
+            width: 100%;
+
+            height: auto;
+
+            flex: 1;
+
+            min-height: 0;
+          }
+
+
+          .cap-card-content h3 {
+            max-width: 100%;
+
+            font-size: clamp(
+              35px,
+              10.8vw,
+              52px
+            );
+
+            line-height: 0.91;
+
+            letter-spacing: -0.06em;
+
+            padding-right: 22px;
+          }
+
+
+          .cap-card-content p {
+            margin-top: auto;
+
+            padding-top: 30px;
+
+            max-width: 100%;
+
+            font-size: 14px;
+
+            line-height: 1.55;
+          }
+
+
+          /* TOOLS */
+
+          .cap-tools {
+            gap: 9px 13px;
+
+            margin-top: 18px;
+
+            padding-right: 5px;
+          }
+
+
+          .cap-tool {
+            font-size: 9px;
+
+            gap: 5px;
+          }
+
+
+          .cap-tool img {
+            width: 14px;
+            height: 14px;
+          }
+
+
+          /* ARROW */
+
+          .cap-card-arrow {
+            top: 26px;
+
+            right: 25px;
+
+            font-size: 23px;
+          }
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           SMALL MOBILE
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 390px) {
+
+          .capabilities-section {
+            padding-top: 70px;
+          }
+
+
+          .cap-header {
+            margin-bottom: 44px;
+          }
+
+
+          .cap-header h2 {
+            font-size: 43px;
+          }
+
+
+          .cap-header p {
+            font-size: 13px;
+          }
+
+
+          .cap-stack {
+            height: calc(100vh + 1px);
+          }
+
+
+          .cap-stack-card {
+            height: 66vh;
+
+            min-height: 445px;
+
+            padding: 23px;
+
+            border-radius: 22px;
+          }
+
+
+          .cap-card-content h3 {
+            font-size: clamp(
+              32px,
+              10.5vw,
+              45px
+            );
+          }
+
+
+          .cap-card-content p {
+            font-size: 13px;
+
+            line-height: 1.5;
+          }
+
+
+          .cap-tools {
+            gap: 8px 10px;
+          }
+
+
+          .cap-tool {
+            font-size: 8px;
+          }
+
+
+          .cap-tool img {
+            width: 13px;
+            height: 13px;
+          }
+
+
+          .cap-card-arrow {
+            top: 22px;
+
+            right: 22px;
+
+            font-size: 21px;
+          }
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           VERY SHORT MOBILE SCREENS
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 560px) and (max-height: 700px) {
+
+          .cap-stack-card {
+            height: 72vh;
+          }
+
+
+          .cap-stack {
+            height: calc(100vh + 1px);
+          }
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           REDUCED MOTION
+        ═══════════════════════════════════════════════ */
+
+        @media (prefers-reduced-motion: reduce) {
+
+          .cap-stack-card {
+            transform: none !important;
+          }
+
+        }
+
       `}</style>
     </section>
   )

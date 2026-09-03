@@ -76,22 +76,22 @@ const SUB_NODES = [
 
 // Individual Make.com-style workflow node
 function MNode({ x, y, hi }) {
-  const bg = hi ? 'rgba(232,164,96,0.26)' : 'rgba(194,98,45,0.14)'
-  const bd = hi ? 'rgba(232,164,96,0.72)' : 'rgba(194,98,45,0.50)'
-  const i1 = hi ? 'rgba(232,164,96,0.65)' : 'rgba(194,98,45,0.48)'
+  const bg = hi ? 'rgba(232,164,96,0.26)' : 'rgba(255,133,0,0.14)'
+  const bd = hi ? 'rgba(232,164,96,0.72)' : 'rgba(255,133,0,0.50)'
+  const i1 = hi ? 'rgba(232,164,96,0.65)' : 'rgba(255,133,0,0.48)'
   const i2 = hi ? 'rgba(255,210,160,0.42)' : 'rgba(232,164,96,0.28)'
   return (
     <g>
       <rect x={x-14} y={y-10} width="28" height="20" rx="3.5" fill={bg} stroke={bd} strokeWidth="1"/>
       <rect x={x-9}  y={y-6}  width="9"  height="12" rx="2"   fill={i1}/>
       <rect x={x+2}  y={y-4}  width="5"  height="8"  rx="1.5" fill={i2}/>
-      <rect x={x-11} y={y+13} width="22" height="2.5" rx="1"  fill="rgba(194,98,45,0.24)"/>
-      <rect x={x-7}  y={y+18} width="14" height="2"  rx="1"   fill="rgba(194,98,45,0.14)"/>
+      <rect x={x-11} y={y+13} width="22" height="2.5" rx="1"  fill="rgba(255,133,0,0.24)"/>
+      <rect x={x-7}  y={y+18} width="14" height="2"  rx="1"   fill="rgba(255,133,0,0.14)"/>
     </g>
   )
 }
 
-const LC = 'rgba(212,120,74,0.50)'  // line color
+const LC = 'rgba(255,153,51,0.50)'  // line color
 const LW = '1.2'                     // line width
 
 export default function CaseStudyImage({ label, src }) {
@@ -111,10 +111,10 @@ export default function CaseStudyImage({ label, src }) {
           <figcaption style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 11, fontWeight: 600, letterSpacing: 2.2, textTransform: 'uppercase',
-            color: '#C2622D', marginBottom: 14,
+            color: '#FF8500', marginBottom: 14,
             display: 'inline-flex', alignItems: 'center', gap: 10,
           }}>
-            <span style={{ width: 18, height: 1, background: 'linear-gradient(90deg, transparent, #C2622D)' }} />
+            <span style={{ width: 18, height: 1, background: 'linear-gradient(90deg, transparent, #FF8500)' }} />
             {label}
           </figcaption>
         )}
@@ -123,7 +123,7 @@ export default function CaseStudyImage({ label, src }) {
           borderRadius: 20, overflow: 'hidden',
           background: 'var(--night)',
           border: '1px solid var(--hair-warm)',
-          boxShadow: '0 2px 4px rgba(20,16,12,0.04), 0 30px 70px rgba(194,98,45,0.10)',
+          boxShadow: '0 2px 4px rgba(20,16,12,0.04), 0 30px 70px rgba(255,133,0,0.10)',
         }}>
           <img
             src={src}
@@ -155,22 +155,22 @@ export default function CaseStudyImage({ label, src }) {
         borderRadius: 18,
         position: 'relative',
         overflow: 'hidden',
-        border: '1px solid rgba(194,98,45,0.22)',
-        boxShadow: '0 0 0 1px rgba(194,98,45,0.06), 0 0 60px rgba(194,98,45,0.10), inset 0 0 60px rgba(194,98,45,0.04)',
+        border: '1px solid rgba(255,133,0,0.22)',
+        boxShadow: '0 0 0 1px rgba(255,133,0,0.06), 0 0 60px rgba(255,133,0,0.10), inset 0 0 60px rgba(255,133,0,0.04)',
       }}>
 
         {/* Central radial warm glow */}
-        <div style={{ position:'absolute', top:'58%', left:'32%', transform:'translate(-50%,-50%)', width:'68%', height:'230%', background:'radial-gradient(ellipse,rgba(194,98,45,0.42) 0%,transparent 58%)', pointerEvents:'none' }} />
+        <div style={{ position:'absolute', top:'58%', left:'32%', transform:'translate(-50%,-50%)', width:'68%', height:'230%', background:'radial-gradient(ellipse,rgba(255,133,0,0.42) 0%,transparent 58%)', pointerEvents:'none' }} />
         {/* Right-side secondary glow */}
-        <div style={{ position:'absolute', top:'38%', right:'10%', width:'22%', height:'110%', background:'radial-gradient(ellipse,rgba(212,120,74,0.12) 0%,transparent 65%)', pointerEvents:'none' }} />
+        <div style={{ position:'absolute', top:'38%', right:'10%', width:'22%', height:'110%', background:'radial-gradient(ellipse,rgba(255,153,51,0.12) 0%,transparent 65%)', pointerEvents:'none' }} />
         {/* Left edge vignette */}
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,rgba(0,0,0,0.35) 0%,transparent 18%)', pointerEvents:'none' }} />
         {/* Top edge vignette */}
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg,rgba(0,0,0,0.3) 0%,transparent 15%)', pointerEvents:'none' }} />
 
         {/* Bottom edge bright glow line (matches screenshot) */}
-        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'3px', background:'linear-gradient(90deg,transparent 0%,rgba(194,98,45,0.65) 25%,rgba(232,164,96,0.95) 50%,rgba(194,98,45,0.65) 75%,transparent 100%)', pointerEvents:'none' }} />
-        <div style={{ position:'absolute', bottom:0, left:'5%', right:'5%', height:'50px', background:'radial-gradient(ellipse at 50% 100%,rgba(194,98,45,0.30) 0%,transparent 70%)', pointerEvents:'none' }} />
+        <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'3px', background:'linear-gradient(90deg,transparent 0%,rgba(255,133,0,0.65) 25%,rgba(232,164,96,0.95) 50%,rgba(255,133,0,0.65) 75%,transparent 100%)', pointerEvents:'none' }} />
+        <div style={{ position:'absolute', bottom:0, left:'5%', right:'5%', height:'50px', background:'radial-gradient(ellipse at 50% 100%,rgba(255,133,0,0.30) 0%,transparent 70%)', pointerEvents:'none' }} />
 
         <svg
           style={{ position:'absolute', inset:0, width:'100%', height:'100%' }}
@@ -205,7 +205,7 @@ export default function CaseStudyImage({ label, src }) {
           {CHAIN2.map(([x,y,h],i) => <MNode key={`c2n${i}`} x={x} y={y} hi={h===1}/>)}
 
           {/* ── Dashed gap 510→638 ── */}
-          <line x1={510} y1={82} x2={638} y2={82} stroke="rgba(212,120,74,0.32)" strokeWidth="1" strokeDasharray="6 5"/>
+          <line x1={510} y1={82} x2={638} y2={82} stroke="rgba(255,153,51,0.32)" strokeWidth="1" strokeDasharray="6 5"/>
 
           {/* ── Chain 3 lines ── */}
           {CHAIN3_PAIRS.map(([x1,x2],i) => (
@@ -220,24 +220,24 @@ export default function CaseStudyImage({ label, src }) {
           <line x1={904} y1={140} x2={TX} y2={140} stroke={LC} strokeWidth={LW}/>
 
           {/* ── Vertical trunk ── */}
-          <line x1={TX} y1={TY0} x2={TX} y2={TY1} stroke="rgba(212,120,74,0.46)" strokeWidth="1.5"/>
+          <line x1={TX} y1={TY0} x2={TX} y2={TY1} stroke="rgba(255,153,51,0.46)" strokeWidth="1.5"/>
 
           {/* ── Branch rows ── */}
           {BRANCHES.map((row, ri) => (
             <g key={`br${ri}`}>
               {/* Trunk → first node connector */}
-              <line x1={TX} y1={row.y} x2={row.xs[0]} y2={row.y} stroke="rgba(212,120,74,0.46)" strokeWidth="1.2"/>
+              <line x1={TX} y1={row.y} x2={row.xs[0]} y2={row.y} stroke="rgba(255,153,51,0.46)" strokeWidth="1.2"/>
               {/* Node-to-node lines */}
               {row.xs.slice(0,-1).map((nx, ni) => (
-                <line key={`brl${ri}${ni}`} x1={nx} y1={row.y} x2={row.xs[ni+1]} y2={row.y} stroke="rgba(212,120,74,0.42)" strokeWidth="1.1"/>
+                <line key={`brl${ri}${ni}`} x1={nx} y1={row.y} x2={row.xs[ni+1]} y2={row.y} stroke="rgba(255,153,51,0.42)" strokeWidth="1.1"/>
               ))}
               {/* Nodes */}
               {row.xs.map((nx, ni) => (
                 <MNode key={`brn${ri}${ni}`} x={nx} y={row.y} hi={row.hi[ni]===1}/>
               ))}
               {/* Label bars left of branch (small text-like bars) */}
-              <rect x={TX-22} y={row.y+14} width={row.lw[0]} height="3"   rx="1.5" fill="rgba(194,98,45,0.28)"/>
-              <rect x={TX-22} y={row.y+20} width={row.lw[1]} height="2.5" rx="1"   fill="rgba(194,98,45,0.18)"/>
+              <rect x={TX-22} y={row.y+14} width={row.lw[0]} height="3"   rx="1.5" fill="rgba(255,133,0,0.28)"/>
+              <rect x={TX-22} y={row.y+20} width={row.lw[1]} height="2.5" rx="1"   fill="rgba(255,133,0,0.18)"/>
             </g>
           ))}
 
@@ -245,7 +245,7 @@ export default function CaseStudyImage({ label, src }) {
           {SUB_NODES.map((sn, i) => (
             <g key={`sub${i}`}>
               <line x1={sn.fromX} y1={sn.fromY+10} x2={sn.toX} y2={sn.toY-10}
-                stroke="rgba(212,120,74,0.36)" strokeWidth="1"/>
+                stroke="rgba(255,153,51,0.36)" strokeWidth="1"/>
               <MNode x={sn.toX} y={sn.toY} hi={sn.hi}/>
             </g>
           ))}

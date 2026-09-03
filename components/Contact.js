@@ -1,280 +1,786 @@
-import { useRef, useState } from 'react'
-import { motion, useInView, AnimatePresence } from 'framer-motion'
+'use client'
+
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const PERKS = [
-  { title: 'Reply within 4 hours', desc: 'During business hours, almost always faster.' },
-  { title: 'Free 30-min discovery', desc: 'Walk away with a clear automation map — even if we never work together.' },
-  { title: 'No-pressure pricing', desc: 'Fixed quotes after the discovery call. No surprises.' },
+  {
+    title: 'Reply within 4 hours',
+    desc: 'During business hours, almost always faster.',
+  },
+  {
+    title: 'Free 30-min discovery',
+    desc: 'Walk away with a clear automation map — even if we never work together.',
+  },
+  {
+    title: 'No-pressure pricing',
+    desc: 'Fixed quotes after the discovery call. No surprises.',
+  },
 ]
-
-function Field({ label, type = 'text', value, onChange, required, textarea, name }) {
-  const [focus, setFocus] = useState(false)
-  const filled = value && value.length > 0
-  return (
-    <label style={{ display: 'block', position: 'relative' }}>
-      <span style={{
-        position: 'absolute',
-        top: filled || focus ? -7 : (textarea ? 18 : 17),
-        left: 14,
-        padding: filled || focus ? '0 6px' : '0',
-        background: filled || focus ? 'var(--bg-card)' : 'transparent',
-        fontSize: filled || focus ? 11 : 14,
-        color: focus ? '#C2622D' : '#8A6A5A',
-        fontWeight: filled || focus ? 600 : 400,
-        letterSpacing: filled || focus ? 0.6 : 0,
-        textTransform: filled || focus ? 'uppercase' : 'none',
-        transition: 'all 0.25s var(--ease-out)',
-        pointerEvents: 'none',
-      }}>{label}{required && '*'}</span>
-
-      {textarea ? (
-        <textarea
-          name={name}
-          required={required}
-          value={value}
-          onChange={onChange}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          rows={4}
-          style={{
-            width: '100%',
-            padding: '16px 16px 14px',
-            background: 'var(--bg-card)',
-            border: focus ? '1px solid #C2622D' : '1px solid var(--hair-warm)',
-            borderRadius: 12,
-            fontSize: 15,
-            color: '#1A0F0A',
-            fontFamily: 'inherit',
-            outline: 'none',
-            resize: 'vertical',
-            minHeight: 110,
-            transition: 'border-color 0.3s, box-shadow 0.3s',
-            boxShadow: focus ? '0 0 0 3px rgba(194,98,45,0.08)' : 'none',
-          }}
-        />
-      ) : (
-        <input
-          name={name}
-          type={type}
-          required={required}
-          value={value}
-          onChange={onChange}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          style={{
-            width: '100%',
-            padding: '17px 16px 13px',
-            background: 'var(--bg-card)',
-            border: focus ? '1px solid #C2622D' : '1px solid var(--hair-warm)',
-            borderRadius: 12,
-            fontSize: 15,
-            color: '#1A0F0A',
-            fontFamily: 'inherit',
-            outline: 'none',
-            transition: 'border-color 0.3s, box-shadow 0.3s',
-            boxShadow: focus ? '0 0 0 3px rgba(194,98,45,0.08)' : 'none',
-          }}
-        />
-      )}
-    </label>
-  )
-}
 
 export default function Contact() {
   const headRef = useRef(null)
-  const inView = useInView(headRef, { once: true })
 
-  const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
-  const [sent, setSent] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-
-  const onChange = e => setForm({ ...form, [e.target.name]: e.target.value })
-  const onSubmit = e => {
-    e.preventDefault()
-    setSubmitting(true)
-    setTimeout(() => { setSent(true); setSubmitting(false) }, 800)
-  }
+  const inView = useInView(headRef, {
+    once: true,
+    margin: '-50px',
+  })
 
   return (
     <section
       id="contact"
-      style={{
-        position: 'relative',
-        padding: 'clamp(96px,11vw,160px) 0',
-        background: 'var(--bg-alt)',
-        borderTop: '1px solid var(--hair)',
-      }}
+      className="contact-section"
     >
-      {/* Decorative orbs */}
-      <div style={{ position: 'absolute', top: '8%', right: '-4%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle,rgba(194,98,45,0.06),transparent 65%)', pointerEvents: 'none' }} />
-
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 'clamp(40px,6vw,80px)', alignItems: 'start' }} className="contact-grid">
-          {/* Left: copy + perks */}
+
+        <div className="contact-grid">
+
+          {/* ═══════════════════════════════════════════════
+             LEFT — ORANGE
+          ═══════════════════════════════════════════════ */}
+
           <motion.div
             ref={headRef}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22,1,0.36,1] }}
+            initial={{
+              opacity: 0,
+              y: 18,
+            }}
+            animate={
+              inView
+                ? {
+                    opacity: 1,
+                    y: 0,
+                  }
+                : {}
+            }
+            transition={{
+              duration: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="contact-left"
           >
-            <span className="eyebrow">Contact</span>
-            <h2 style={{
-              fontFamily: "'Instrument Serif', serif",
-              fontSize: 'clamp(40px,5.2vw,64px)',
-              fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1,
-              color: '#1A0F0A', marginTop: 16,
-            }}>
-              Let's build<br/><em style={{ color: '#C2622D' }}>something that ships.</em>
+            {/* Eyebrow */}
+
+            <div className="contact-eyebrow">
+              <span className="contact-eyebrow-dot" />
+              <span>Contact</span>
+            </div>
+
+            {/* Heading */}
+
+            <h2>
+              Let's build
+              <br />
+              something
+              <br />
+              that ships.
             </h2>
-            <p style={{ fontSize: 17, color: '#5C3D2A', lineHeight: 1.65, maxWidth: 420, marginTop: 22 }}>
-              Tell us where you'd like more leverage. We'll come back with a short, honest read on whether automation is the right next move — and what it would take.
+
+            {/* Intro */}
+
+            <p>
+              Tell us where you'd like more leverage. We'll come back with a
+              short, honest read on whether automation is the right next move
+              — and what it would take.
             </p>
 
-            <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 22 }}>
-              {PERKS.map((p, i) => (
+            {/* Small decorative line */}
+
+            <div className="contact-accent-line" />
+          </motion.div>
+
+
+          {/* ═══════════════════════════════════════════════
+             RIGHT — WHITE CONTENT
+          ═══════════════════════════════════════════════ */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 18,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              margin: '-40px',
+            }}
+            transition={{
+              duration: 0.65,
+              delay: 0.08,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="contact-right"
+          >
+
+            {/* Intro */}
+
+            <div className="contact-intro">
+              <div className="contact-right-label">
+                Start a conversation
+              </div>
+            </div>
+
+
+            {/* Perks */}
+
+            <div className="contact-perks">
+              {PERKS.map((perk, index) => (
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-30px' }}
-                  transition={{ delay: 0.2 + i * 0.08, duration: 0.55 }}
-                  style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}
+                  key={perk.title}
+                  initial={{
+                    opacity: 0,
+                    y: 8,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    margin: '-20px',
+                  }}
+                  transition={{
+                    delay: 0.12 + index * 0.07,
+                    duration: 0.4,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="contact-perk"
                 >
-                  <div style={{
-                    width: 28, height: 28, borderRadius: 99,
-                    background: 'rgba(194,98,45,0.08)',
-                    border: '1px solid rgba(194,98,45,0.22)',
-                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                    flexShrink: 0,
-                  }}>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C2622D" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5L20 7"/></svg>
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 15, fontWeight: 600, color: '#1A0F0A', marginBottom: 4 }}>{p.title}</div>
-                    <div style={{ fontSize: 14, color: '#5C3D2A', lineHeight: 1.6 }}>{p.desc}</div>
+                  <span className="perk-number">
+                    0{index + 1}
+                  </span>
+
+                  <div className="perk-content">
+                    <div className="perk-title">
+                      {perk.title}
+                    </div>
+
+                    <div className="perk-desc">
+                      {perk.desc}
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Direct channels */}
-            <div style={{ marginTop: 36, paddingTop: 28, borderTop: '1px solid var(--hair-warm)' }}>
-              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: '#8A6A5A', marginBottom: 14 }}>
+
+            {/* Direct contact */}
+
+            <div className="contact-direct">
+
+              <div className="direct-heading">
                 Or reach us directly
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <a href="https://cal.com/chandan-kumar-zhrofj/30min" target="_blank" rel="noopener noreferrer"
-                  className="link-underline"
-                  style={{ fontSize: 15, color: '#1A0F0A', textDecoration: 'none', alignSelf: 'flex-start' }}>
-                  → Book a call on cal.com
+
+              <div className="direct-links">
+
+                <a
+                  href="https://cal.com/chandan-kumar-zhrofj/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="direct-link"
+                >
+                  <span>Book a call</span>
+                  <span className="link-arrow">↗</span>
                 </a>
-                <a href="https://wa.me/919849884501" target="_blank" rel="noopener noreferrer"
-                  className="link-underline"
-                  style={{ fontSize: 15, color: '#1A0F0A', textDecoration: 'none', alignSelf: 'flex-start' }}>
-                  → Chat on WhatsApp
+
+                <a
+                  href="https://wa.me/919849884501"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="direct-link"
+                >
+                  <span>WhatsApp</span>
+                  <span className="link-arrow">↗</span>
                 </a>
+
               </div>
+
             </div>
+
           </motion.div>
 
-          {/* Right: form */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.8, ease: [0.22,1,0.36,1] }}
-            style={{
-              background: 'var(--bg-card)',
-              border: '1px solid var(--hair-warm)',
-              borderRadius: 22,
-              padding: 'clamp(28px,3.5vw,40px)',
-              position: 'relative', overflow: 'hidden',
-              boxShadow: 'var(--shadow-2)',
-            }}
-          >
-            {/* Subtle inner glow */}
-            <div style={{ position: 'absolute', top: -120, right: -120, width: 280, height: 280, borderRadius: '50%', background: 'radial-gradient(circle, rgba(194,98,45,0.10), transparent 70%)', pointerEvents: 'none' }} />
-
-            <AnimatePresence mode="wait">
-              {!sent ? (
-                <motion.form
-                  key="form"
-                  onSubmit={onSubmit}
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0, y: -10, transition: { duration: 0.3 } }}
-                  style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 16 }}
-                >
-                  <h3 style={{
-                    fontFamily: "'Instrument Serif', serif",
-                    fontSize: 'clamp(22px,2.2vw,28px)', fontWeight: 400, letterSpacing: '-0.02em',
-                    color: '#1A0F0A', marginBottom: 4,
-                  }}>
-                    Tell us a bit about you.
-                  </h3>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }} className="contact-row">
-                    <Field name="name"    label="Name"    value={form.name}    onChange={onChange} required />
-                    <Field name="email"   label="Email"   type="email" value={form.email} onChange={onChange} required />
-                  </div>
-                  <Field name="company" label="Company" value={form.company} onChange={onChange} />
-                  <Field name="message" label="What would you like to automate?" textarea value={form.message} onChange={onChange} required />
-
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="btn btn-primary"
-                    style={{ padding: '15px 24px', fontSize: 15, marginTop: 8, opacity: submitting ? 0.65 : 1 }}
-                  >
-                    {submitting ? 'Sending…' : 'Send a message'}
-                    {!submitting && (
-                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                        <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    )}
-                  </button>
-
-                  <p style={{ fontSize: 12.5, color: '#8A6A5A', textAlign: 'center', marginTop: 4 }}>
-                    By submitting, you agree to our <a href="#" style={{ color: '#C2622D', textDecoration: 'none' }}>privacy policy</a>.
-                  </p>
-
-                  <style>{`@media(max-width:560px){.contact-row{grid-template-columns:1fr!important}}`}</style>
-                </motion.form>
-              ) : (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, ease: [0.22,1,0.36,1] }}
-                  style={{ position: 'relative', textAlign: 'center', padding: '40px 0' }}
-                >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.1, type: 'spring', stiffness: 200, damping: 14 }}
-                    style={{
-                      width: 64, height: 64, borderRadius: 99,
-                      background: 'linear-gradient(135deg, #10B981, #059669)',
-                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-                      marginBottom: 24,
-                      boxShadow: '0 12px 36px rgba(16,185,129,0.28)',
-                    }}
-                  >
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5L20 7"/></svg>
-                  </motion.div>
-                  <h3 style={{ fontFamily: "'Instrument Serif', serif", fontSize: 28, fontWeight: 400, color: '#1A0F0A', marginBottom: 8 }}>
-                    Message sent.
-                  </h3>
-                  <p style={{ fontSize: 15, color: '#5C3D2A', lineHeight: 1.65, maxWidth: 360, margin: '0 auto' }}>
-                    Thanks, {form.name || 'friend'} — we'll reply within a few hours. Usually faster.
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
         </div>
+
       </div>
 
-      <style>{`@media(max-width:880px){.contact-grid{grid-template-columns:1fr!important}}`}</style>
+
+      <style jsx global>{`
+
+        /* ═══════════════════════════════════════════════
+           SECTION
+        ═══════════════════════════════════════════════ */
+
+        .contact-section {
+          position: relative;
+          width: 100%;
+          padding: clamp(52px, 6vw, 90px) 0;
+          background: #ff8500;
+          overflow: hidden;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           GRID
+        ═══════════════════════════════════════════════ */
+
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 0.9fr 1.1fr;
+          gap: 0;
+          align-items: stretch;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           LEFT
+        ═══════════════════════════════════════════════ */
+
+        .contact-left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          min-height: 560px;
+
+          padding: clamp(
+            40px,
+            5vw,
+            72px
+          );
+
+          background: #ff8500;
+          color: #ffffff;
+        }
+
+
+        .contact-eyebrow {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+
+          margin-bottom: 22px;
+
+          font-family: 'Inter', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+
+          color: #ffffff;
+        }
+
+
+        .contact-eyebrow-dot {
+          width: 6px;
+          height: 6px;
+
+          flex: 0 0 6px;
+
+          border-radius: 50%;
+
+          background: #ffffff;
+        }
+
+
+        .contact-left h2 {
+          margin: 0;
+
+          font-family: 'Onest', sans-serif;
+          font-size: clamp(
+            56px,
+            7.5vw,
+            104px
+          );
+
+          font-weight: 800;
+
+          line-height: 0.88;
+          letter-spacing: -0.075em;
+
+          color: #ffffff;
+        }
+
+
+        .contact-left p {
+          margin: 24px 0 0;
+
+          max-width: 460px;
+
+          font-family: 'Inter', sans-serif;
+          font-size: clamp(
+            15px,
+            1.2vw,
+            18px
+          );
+
+          line-height: 1.6;
+          letter-spacing: -0.01em;
+
+          color: rgba(255, 255, 255, 0.85);
+        }
+
+
+        .contact-accent-line {
+          width: 56px;
+          height: 3px;
+
+          margin-top: 42px;
+
+          background: #ffffff;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           RIGHT
+        ═══════════════════════════════════════════════ */
+
+        .contact-right {
+          min-height: 560px;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          padding: clamp(
+            40px,
+            5vw,
+            72px
+          );
+
+          background: #ffffff;
+
+          border-left: 1px solid
+            rgba(13, 13, 13, 0.08);
+
+          box-sizing: border-box;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           INTRO
+        ═══════════════════════════════════════════════ */
+
+        .contact-intro {
+          max-width: 590px;
+        }
+
+
+        .contact-right-label {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+
+          margin-bottom: 20px;
+
+          font-family: 'Inter', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+
+          color: #ff8500;
+        }
+
+
+        .contact-right-label::before {
+          content: '';
+
+          width: 6px;
+          height: 6px;
+
+          flex: 0 0 6px;
+
+          border-radius: 50%;
+
+          background: #ff8500;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           PERKS
+        ═══════════════════════════════════════════════ */
+
+        .contact-perks {
+          margin-top: 48px;
+
+          max-width: 590px;
+
+          border-top: 1px solid
+            rgba(13, 13, 13, 0.14);
+        }
+
+
+        .contact-perk {
+          display: grid;
+
+          grid-template-columns: 42px minmax(0, 1fr);
+
+          gap: 14px;
+
+          padding: 18px 0;
+
+          border-bottom: 1px solid
+            rgba(13, 13, 13, 0.12);
+        }
+
+
+        .perk-number {
+          padding-top: 2px;
+
+          font-family: 'Onest', sans-serif;
+
+          font-size: 11px;
+
+          font-weight: 700;
+
+          letter-spacing: -0.02em;
+
+          color: #ff8500;
+        }
+
+
+        .perk-content {
+          min-width: 0;
+        }
+
+
+        .perk-title {
+          margin-bottom: 4px;
+
+          font-family: 'Inter', sans-serif;
+
+          font-size: 13px;
+
+          font-weight: 700;
+
+          color: #0d0d0d;
+        }
+
+
+        .perk-desc {
+          font-family: 'Inter', sans-serif;
+
+          font-size: 12px;
+
+          line-height: 1.5;
+
+          color: #77716d;
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           DIRECT CONTACT
+        ═══════════════════════════════════════════════ */
+
+        .contact-direct {
+          display: flex;
+
+          align-items: flex-start;
+
+          flex-direction: column;
+
+          gap: 18px;
+
+          margin-top: 34px;
+
+          padding-top: 22px;
+
+          border-top: 1px solid
+            rgba(13, 13, 13, 0.14);
+        }
+
+
+        .direct-heading {
+          font-family: 'Inter', sans-serif;
+
+          font-size: 9px;
+
+          font-weight: 700;
+
+          letter-spacing: 0.14em;
+
+          text-transform: uppercase;
+
+          color: #77716d;
+
+          white-space: nowrap;
+        }
+
+
+        .direct-links {
+          display: flex;
+
+          align-items: center;
+
+          gap: 26px;
+
+          flex-wrap: wrap;
+        }
+
+
+        .direct-link {
+          position: relative;
+
+          display: inline-flex;
+
+          align-items: center;
+
+          gap: 8px;
+
+          padding: 13px 22px;
+
+          border-radius: 999px;
+
+          background: #ff8500;
+          border: 1px solid #ff8500;
+
+          font-family: 'Inter', sans-serif;
+
+          font-size: 13px;
+
+          font-weight: 700;
+
+          color: #ffffff;
+
+          text-decoration: none;
+
+          box-shadow: 0 6px 20px rgba(255, 133, 0, 0.28);
+
+          transition:
+            background 0.25s
+              cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.25s
+              cubic-bezier(0.22, 1, 0.36, 1),
+            box-shadow 0.25s
+              cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+
+        .direct-link:hover {
+          background: #e67600;
+          border-color: #e67600;
+
+          transform: translateY(-2px);
+
+          box-shadow: 0 10px 28px rgba(255, 133, 0, 0.38);
+        }
+
+
+        .link-arrow {
+          font-size: 15px;
+
+          line-height: 1;
+
+          transition:
+            transform 0.25s
+            cubic-bezier(
+              0.22,
+              1,
+              0.36,
+              1
+            );
+        }
+
+
+        .direct-link:hover .link-arrow {
+          transform: translate(
+            3px,
+            -3px
+          );
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           TABLET
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 880px) {
+
+          .contact-grid {
+            grid-template-columns: 1fr;
+          }
+
+
+          .contact-left {
+            min-height: auto;
+
+            padding:
+              clamp(44px, 8vw, 65px);
+          }
+
+
+          .contact-right {
+            min-height: auto;
+
+            padding:
+              clamp(40px, 7vw, 60px);
+          }
+
+
+          .contact-left h2 {
+            font-size: clamp(
+              52px,
+              10vw,
+              76px
+            );
+          }
+
+
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           MOBILE
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 560px) {
+
+          .contact-section {
+            padding: 0;
+          }
+
+
+          .contact-left {
+            padding:
+              58px 26px 54px;
+          }
+
+
+          .contact-eyebrow {
+            margin-bottom: 19px;
+          }
+
+
+          .contact-left h2 {
+            font-size: clamp(
+              47px,
+              14vw,
+              64px
+            );
+
+            line-height: 0.9;
+          }
+
+
+          .contact-accent-line {
+            width: 44px;
+
+            height: 2px;
+
+            margin-top: 32px;
+          }
+
+
+          .contact-right {
+            padding:
+              42px 26px 46px;
+          }
+
+
+          .contact-right-label {
+            margin-bottom: 17px;
+          }
+
+
+          .contact-left p {
+            font-size: 16px;
+
+            line-height: 1.5;
+          }
+
+
+          .contact-perks {
+            margin-top: 38px;
+          }
+
+
+          .contact-perk {
+            grid-template-columns:
+              32px
+              minmax(0, 1fr);
+
+            gap: 10px;
+
+            padding: 16px 0;
+          }
+
+
+          .perk-title {
+            font-size: 12.5px;
+          }
+
+
+          .perk-desc {
+            font-size: 11.5px;
+          }
+
+
+          .contact-direct {
+            margin-top: 28px;
+
+            padding-top: 19px;
+
+            gap: 16px;
+          }
+
+
+          .direct-links {
+            width: 100%;
+
+            gap: 18px;
+          }
+
+
+          .direct-link {
+            font-size: 12.5px;
+          }
+        }
+
+
+        /* ═══════════════════════════════════════════════
+           SMALL MOBILE
+        ═══════════════════════════════════════════════ */
+
+        @media (max-width: 390px) {
+
+          .contact-left {
+            padding:
+              50px 23px 46px;
+          }
+
+
+          .contact-right {
+            padding:
+              38px 23px 42px;
+          }
+
+
+          .contact-left h2 {
+            font-size: 46px;
+          }
+
+
+          .contact-left p {
+            font-size: 15px;
+          }
+
+
+          .contact-perks {
+            margin-top: 32px;
+          }
+
+
+          .perk-desc {
+            font-size: 11px;
+          }
+        }
+
+      `}</style>
     </section>
   )
 }

@@ -2,10 +2,10 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const TYPE_META = {
-  challenge:  { eyebrow: 'The Challenge', tone: '#C2622D' },
-  solution:   { eyebrow: 'The Solution',  tone: '#C2622D' },
-  whyItWorks: { eyebrow: 'Why It Works',  tone: '#C2622D' },
-  impact:     { eyebrow: 'The Impact',    tone: '#C2622D' },
+  challenge:  { eyebrow: 'The Challenge', tone: '#FF8500' },
+  solution:   { eyebrow: 'The Solution',  tone: '#FF8500' },
+  whyItWorks: { eyebrow: 'Why It Works',  tone: '#FF8500' },
+  impact:     { eyebrow: 'The Impact',    tone: '#FF8500' },
 }
 
 function SolutionBullet({ text, i }) {
@@ -29,10 +29,10 @@ function SolutionBullet({ text, i }) {
       }}
     >
       <span style={{
-        fontFamily: "'Instrument Serif', serif",
-        fontSize: 22, fontWeight: 400,
+        fontFamily: "'Onest', sans-serif",
+        fontSize: 22, fontWeight: 800,
         letterSpacing: '-0.02em',
-        color: '#C2622D',
+        color: '#FF8500',
         lineHeight: 1.2,
       }}>
         {String(i + 1).padStart(2, '0')}
@@ -57,11 +57,11 @@ function ImpactBullet({ text, i }) {
       <span style={{
         flexShrink: 0, marginTop: 8,
         width: 22, height: 22, borderRadius: 99,
-        background: 'rgba(194,98,45,0.10)',
-        border: '1px solid rgba(194,98,45,0.28)',
+        background: 'rgba(255,133,0,0.10)',
+        border: '1px solid rgba(255,133,0,0.28)',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#C2622D" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#FF8500" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5L20 7"/></svg>
       </span>
       <p style={{ fontSize: 16, color: '#3D2314', lineHeight: 1.75, margin: 0 }}>{text}</p>
     </motion.div>
@@ -87,16 +87,16 @@ function WhyBullet({ text, i }) {
         display: 'flex', gap: 14, alignItems: 'flex-start',
         transition: 'border-color 0.4s, box-shadow 0.4s',
       }}
-      onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(194,98,45,0.34)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(194,98,45,0.08)' }}
+      onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,133,0,0.34)'; e.currentTarget.style.boxShadow = '0 10px 28px rgba(255,133,0,0.08)' }}
       onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--hair-warm)'; e.currentTarget.style.boxShadow = 'none' }}
     >
       <span style={{
         flexShrink: 0,
         width: 28, height: 28,
         borderRadius: 99,
-        background: 'linear-gradient(135deg,#C2622D,#A8501F)',
+        background: 'linear-gradient(135deg,#FF8500,#CC6A00)',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-        boxShadow: '0 4px 12px rgba(194,98,45,0.3)',
+        boxShadow: '0 4px 12px rgba(255,133,0,0.3)',
       }}>
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
           <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="white" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/>
@@ -113,7 +113,7 @@ function WhyBullet({ text, i }) {
 export default function CaseStudySection({ section, index }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
-  const meta = TYPE_META[section.type] || { eyebrow: section.title, tone: '#C2622D' }
+  const meta = TYPE_META[section.type] || { eyebrow: section.title, tone: '#FF8500' }
 
   return (
     <motion.section
@@ -135,8 +135,8 @@ export default function CaseStudySection({ section, index }) {
             {meta.eyebrow}
           </div>
           <div style={{
-            fontFamily: "'Instrument Serif', serif",
-            fontSize: 48, fontWeight: 400, color: 'rgba(194,98,45,0.25)',
+            fontFamily: "'Onest', sans-serif",
+            fontSize: 48, fontWeight: 800, color: 'rgba(255,133,0,0.25)',
             letterSpacing: '-0.03em', lineHeight: 1,
           }}>
             {String(index + 1).padStart(2, '0')}
@@ -146,9 +146,9 @@ export default function CaseStudySection({ section, index }) {
         {/* Content */}
         <div>
           <h2 style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "'Onest', sans-serif",
             fontSize: 'clamp(28px,3.6vw,46px)',
-            fontWeight: 400, letterSpacing: '-0.025em', lineHeight: 1.05,
+            fontWeight: 800, letterSpacing: '-0.025em', lineHeight: 1.05,
             color: '#1A0F0A', marginBottom: 28,
           }}>
             {section.title}
@@ -185,9 +185,9 @@ export default function CaseStudySection({ section, index }) {
                 <p style={{
                   marginTop: 28,
                   fontSize: 16, color: '#5C3D2A', lineHeight: 1.75, maxWidth: 820,
-                  borderLeft: '2px solid rgba(194,98,45,0.32)',
+                  borderLeft: '2px solid rgba(255,133,0,0.32)',
                   paddingLeft: 22, fontStyle: 'italic',
-                  fontFamily: "'Instrument Serif', serif", fontSize: 18,
+                  fontFamily: "'Onest', sans-serif", fontSize: 18,
                 }}>
                   {section.content}
                 </p>

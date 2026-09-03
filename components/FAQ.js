@@ -1,5 +1,9 @@
 import { useState, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import {
+  motion,
+  AnimatePresence,
+  useInView,
+} from 'framer-motion'
 
 const FAQS = [
   {
@@ -32,145 +36,460 @@ const FAQS = [
   },
 ]
 
+
 function Item({ f, isOpen, onToggle, i }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: i * 0.04 }}
+      initial={{
+        opacity: 0,
+        y: 12,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        margin: '-40px',
+      }}
+      transition={{
+        duration: 0.5,
+        delay: i * 0.04,
+      }}
       style={{
-        borderTop: i === 0 ? '1px solid var(--hair-warm)' : 'none',
-        borderBottom: '1px solid var(--hair-warm)',
+        borderTop:
+          i === 0
+            ? '1px solid var(--hair)'
+            : 'none',
+        borderBottom:
+          '1px solid var(--hair)',
       }}
     >
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
+        className="faq-question"
         style={{
           width: '100%',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          padding: '24px 4px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '22px 0',
           background: 'transparent',
-          border: 'none', cursor: 'pointer',
+          border: 'none',
+          cursor: 'pointer',
           textAlign: 'left',
           fontFamily: 'inherit',
-          gap: 24,
+          gap: 30,
         }}
       >
-        <span style={{
-          fontFamily: "'Instrument Serif', serif",
-          fontSize: 'clamp(20px,2.1vw,25px)',
-          fontWeight: 400,
-          letterSpacing: '-0.02em',
-          lineHeight: 1.25,
-          color: isOpen ? '#C2622D' : '#1A0F0A',
-          transition: 'color 0.4s',
-        }}>
+
+        {/* Question */}
+
+        <span
+          style={{
+            fontFamily: "'Onest', sans-serif",
+            fontSize:
+              'clamp(18px, 1.8vw, 23px)',
+            fontWeight: 700,
+            letterSpacing: '-0.04em',
+            lineHeight: 1.2,
+            color: isOpen
+              ? '#FF8500'
+              : '#0D0D0D',
+            transition:
+              'color 0.3s ease',
+          }}
+        >
           {f.q}
         </span>
-        <span style={{
-          flexShrink: 0,
-          width: 38, height: 38,
-          borderRadius: 99,
-          border: '1px solid var(--hair-warm)',
-          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
-          background: isOpen ? 'linear-gradient(135deg,#C2622D,#A8501F)' : 'transparent',
-          color: isOpen ? '#FFF' : '#5C3D2A',
-          transition: 'background 0.4s, color 0.4s, border-color 0.4s',
-        }}>
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <line x1="3" y1="8" x2="13" y2="8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-            <line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"
-              style={{ transformOrigin: '8px 8px', transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.4s var(--ease-out)' }}
-            />
-          </svg>
+
+
+        {/* Minimal plus */}
+
+        <span
+          className="faq-icon"
+          style={{
+            position: 'relative',
+            flexShrink: 0,
+            width: 28,
+            height: 28,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: isOpen
+              ? '#FF8500'
+              : '#0D0D0D',
+            transition:
+              'color 0.3s ease',
+          }}
+        >
+
+          <span
+            style={{
+              position: 'absolute',
+              width: 14,
+              height: 1,
+              background: 'currentColor',
+            }}
+          />
+
+          <span
+            style={{
+              position: 'absolute',
+              width: 14,
+              height: 1,
+              background: 'currentColor',
+              transform:
+                isOpen
+                  ? 'rotate(90deg)'
+                  : 'rotate(0deg)',
+              transition:
+                'transform 0.35s cubic-bezier(0.22,1,0.36,1)',
+            }}
+          />
+
         </span>
+
       </button>
+
+
+      {/* Answer */}
 
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            style={{ overflow: 'hidden' }}
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: 'auto',
+              opacity: 1,
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.45,
+              ease: [
+                0.22,
+                1,
+                0.36,
+                1,
+              ],
+            }}
+            style={{
+              overflow: 'hidden',
+            }}
           >
-            <div style={{ paddingBottom: 28, paddingRight: 56 }}>
-              <p style={{ fontSize: 16, color: '#5C3D2A', lineHeight: 1.75, maxWidth: 680 }}>{f.a}</p>
+            <div
+              style={{
+                padding:
+                  '0 50px 25px 0',
+              }}
+            >
+              <p
+                style={{
+                  margin: 0,
+                  maxWidth: 680,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 14,
+                  color: '#6E6863',
+                  lineHeight: 1.7,
+                }}
+              >
+                {f.a}
+              </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
     </motion.div>
   )
 }
 
+
 export default function FAQ() {
   const [open, setOpen] = useState(0)
+
   const headRef = useRef(null)
-  const inView = useInView(headRef, { once: true })
+
+  const inView = useInView(headRef, {
+    once: true,
+    margin: '-70px',
+  })
+
 
   return (
     <section
       id="faq"
       style={{
         position: 'relative',
-        padding: 'clamp(96px,11vw,160px) 0',
-        background: 'var(--bg)',
-        borderTop: '1px solid var(--hair)',
+        padding:
+          'clamp(90px, 11vw, 150px) 0',
+        background: '#FFFFFF',
+        borderTop:
+          '1px solid var(--hair)',
       }}
     >
+
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: 'clamp(40px,6vw,96px)', alignItems: 'start' }} className="faq-grid">
+
+        <div
+          className="faq-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns:
+              '0.8fr 1.4fr',
+            gap:
+              'clamp(50px, 9vw, 140px)',
+            alignItems: 'start',
+          }}
+        >
+
+          {/* ───────────────── LEFT ───────────────── */}
+
           <motion.div
             ref={headRef}
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22,1,0.36,1] }}
-            style={{ position: 'sticky', top: 120 }}
-            className="faq-sticky"
+            initial={{
+              opacity: 0,
+              y: 25,
+            }}
+            animate={
+              inView
+                ? {
+                    opacity: 1,
+                    y: 0,
+                  }
+                : {}
+            }
+            transition={{
+              duration: 0.8,
+              ease: [
+                0.22,
+                1,
+                0.36,
+                1,
+              ],
+            }}
+            className="faq-heading"
+            style={{
+              position: 'sticky',
+              top: 100,
+            }}
           >
-            <span className="eyebrow">FAQ</span>
-            <h2 style={{
-              fontFamily: "'Instrument Serif', serif",
-              fontSize: 'clamp(40px,5.2vw,64px)',
-              fontWeight: 400, letterSpacing: '-0.03em', lineHeight: 1,
-              color: '#1A0F0A', marginTop: 16,
-            }}>
-              Questions,<br/><em style={{ color: '#C2622D' }}>answered.</em>
+
+            {/* Eyebrow */}
+
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 9,
+                marginBottom: 22,
+              }}
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: '50%',
+                  background: '#FF8500',
+                }}
+              />
+
+              <span
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  color: '#FF8500',
+                }}
+              >
+                FAQ
+              </span>
+            </div>
+
+
+            {/* Heading */}
+
+            <h2
+              style={{
+                margin: 0,
+                fontFamily: "'Onest', sans-serif",
+                fontSize:
+                  'clamp(50px, 6vw, 82px)',
+                fontWeight: 800,
+                letterSpacing: '-0.075em',
+                lineHeight: 0.87,
+                color: '#0D0D0D',
+              }}
+            >
+              Questions,
+              <br />
+
+              <span
+                style={{
+                  color: '#FF8500',
+                }}
+              >
+                answered.
+              </span>
             </h2>
-            <p style={{ fontSize: 16, color: '#5C3D2A', lineHeight: 1.65, maxWidth: 360, marginTop: 22 }}>
-              If your question isn't here, drop us a message — we usually respond within a few hours.
+
+
+            {/* Description */}
+
+            <p
+              style={{
+                margin:
+                  'clamp(25px, 3vw, 36px) 0 0',
+                maxWidth: 340,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 14,
+                lineHeight: 1.7,
+                color: '#77716D',
+              }}
+            >
+              If your question isn't here,
+              drop us a message. We usually
+              respond within a few hours.
             </p>
-            <a href="https://cal.com/chandan-kumar-zhrofj/30min" target="_blank" rel="noopener noreferrer" className="btn btn-ghost" style={{ marginTop: 22, padding: '11px 20px', fontSize: 14 }}>
+
+
+            {/* Simple CTA */}
+
+            <a
+              href="https://cal.com/chandan-kumar-zhrofj/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="faq-cta"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 9,
+                marginTop: 22,
+                paddingBottom: 7,
+                borderBottom:
+                  '1px solid #0D0D0D',
+                fontFamily: "'Inter', sans-serif",
+                fontSize: 13,
+                fontWeight: 700,
+                color: '#0D0D0D',
+                textDecoration: 'none',
+              }}
+            >
               Talk to us
-              <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+
+              <span
+                className="faq-cta-arrow"
+                style={{
+                  fontSize: 16,
+                  lineHeight: 1,
+                  transition:
+                    'transform 0.3s ease',
+                }}
+              >
+                ↗
+              </span>
             </a>
+
           </motion.div>
 
-          <div>
+
+          {/* ───────────────── QUESTIONS ───────────────── */}
+
+          <div
+            style={{
+              width: '100%',
+            }}
+          >
             {FAQS.map((f, i) => (
               <Item
                 key={i}
                 f={f}
                 i={i}
                 isOpen={open === i}
-                onToggle={() => setOpen(open === i ? -1 : i)}
+                onToggle={() =>
+                  setOpen(
+                    open === i
+                      ? -1
+                      : i
+                  )
+                }
               />
             ))}
           </div>
+
         </div>
+
       </div>
 
+
+      {/* ───────────────── RESPONSIVE ───────────────── */}
+
       <style>{`
-        @media (max-width: 900px) {
-          .faq-grid { grid-template-columns: 1fr !important; }
-          .faq-sticky { position: relative !important; top: auto !important; }
+
+        .faq-question:hover span {
+          color: #FF8500 !important;
         }
+
+        .faq-question:hover .faq-icon {
+          color: #FF8500 !important;
+        }
+
+        .faq-cta:hover {
+          color: #FF8500 !important;
+          border-color: #FF8500 !important;
+        }
+
+        .faq-cta:hover .faq-cta-arrow {
+          transform: translate(3px, -3px);
+        }
+
+
+        @media (max-width: 900px) {
+
+          .faq-grid {
+            grid-template-columns: 1fr !important;
+            gap: 55px !important;
+          }
+
+          .faq-heading {
+            position: relative !important;
+            top: auto !important;
+          }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+          .faq-question {
+            padding: 19px 0 !important;
+            gap: 15px !important;
+          }
+
+          .faq-question > span:first-child {
+            font-size: 17px !important;
+          }
+
+          .faq-icon {
+            width: 24px !important;
+            height: 24px !important;
+          }
+
+          .faq-question + div p {
+            font-size: 13px !important;
+          }
+
+        }
+
       `}</style>
     </section>
   )

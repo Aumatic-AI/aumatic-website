@@ -8,11 +8,10 @@ Single-page marketing site for **Aumatic.AI**, an AI Automation Agency. Statical
 - **React 18**
 - **Framer Motion 11** — section reveals, hover micro-interactions, AnimatePresence, mouse-tracked motion values
 - **Lenis** — smooth-scrolling provider wrapped around the whole app (`components/SmoothScroll.js`)
-- **GSAP + react-intersection-observer** — installed for scroll choreography (currently used lightly; primary motion still goes through Framer Motion)
 - **Tailwind CSS 3** — configured but used **sparingly**; almost all styling is inline `style={{...}}` or in `styles/globals.css`
 - **No TypeScript**, no ESLint config, no test framework, no CI
 
-`tailwind.config.js` extends a `brand` palette (purple/cyan/green) that is **not used** — the live design system is the warm-beige terracotta palette defined as CSS variables in `styles/globals.css`. Treat the CSS variables as the source of truth.
+`tailwind.config.js` is a bare default config (no `extend`) — the live design system is the warm-beige terracotta palette defined as CSS variables in `styles/globals.css`. Treat the CSS variables as the source of truth.
 
 ## Commands
 
@@ -77,7 +76,6 @@ Self-contained, single-default-export React files. Data (steps, cards, testimoni
 | `Footer.js`       | ✅ | Big serif "Ready when you are." headline + columns + giant decorative wordmark. Most footer links are placeholder `#`. |
 | `StickyCTA.js`    | ✅ | Fixed bottom pill ("3 spots left this month") appearing after `>720px` scroll. |
 | `WhatsAppFloat.js`| ✅ | Fixed bottom-right WhatsApp button → `wa.me/919849884501`, with double pulse-ring. |
-| `HowItWorks.js`, `Pricing.js`, `Results.js`, `Services.js` | ❌ unused | Legacy components from the original dark-theme template. Not imported anywhere. Safe to delete but kept for reference. |
 
 When adding a new section, import it in `pages/index.js` and put it in the `<main>` order — that file is the section registry.
 
@@ -173,7 +171,7 @@ Keyframes: `blob1/2/3`, `orb-pulse`, `float-particle`, `spin-slow`, `marquee`, `
 
 ## Things to know before editing
 
-- The `brand` color palette in `tailwind.config.js` is **dead** — left over from the original dark-theme template. The README also still describes that dark-theme version; treat the README as out of date and the CSS variables + live components as ground truth.
+- The legacy `HowItWorks.js`/`Pricing.js`/`Results.js`/`Services.js` components and the dead `brand` color palette/animation keyframes in `tailwind.config.js` (their only consumers) have been deleted. The README still describes that dark-theme version; treat the README as out of date and the CSS variables + live components as ground truth.
 - The intro `<Intro>` in `pages/index.js` blocks the UI for ~850ms on every navigation to `/`. Edit the `setTimeout(onDone, 850)` if you need to shorten it for dev.
 - `next.config.js` enables `reactStrictMode` only — no images optimization config, so `<img>` is used directly (no `next/image`). Iconify CDN responses are SVG, served with CORS.
 - There is no analytics, no form backend, no env vars. The Contact form (`Contact.js`) flips to a success state after a fake `setTimeout(800)`.
@@ -193,12 +191,11 @@ components/
   WhyUs.js, CaseStudies.js, CaseStudyCard.js, Testimonials.js,
   Impact.js, FAQ.js, Contact.js, Footer.js, StickyCTA.js, WhatsAppFloat.js
   CaseStudyHero.js, CaseStudySection.js, CaseStudyImage.js
-  HowItWorks.js, Pricing.js, Results.js, Services.js  ← unused, legacy
 data/
   caseStudies.js           12 case studies (mojibake cleaned)
 styles/
   globals.css              design tokens, utilities, keyframes
 public/                    images, favicon, logo, brand
-tailwind.config.js         present but mostly unused
+tailwind.config.js         bare default config, no extend
 next.config.js             reactStrictMode only
 ```

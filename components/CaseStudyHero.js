@@ -21,7 +21,7 @@ export default function CaseStudyHero({ study }) {
               textDecoration: 'none', transition: 'color 0.25s, gap 0.25s',
               fontFamily: "'Inter', sans-serif",
             }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#C2622D'; e.currentTarget.style.gap = '12px' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#FF8500'; e.currentTarget.style.gap = '12px' }}
             onMouseLeave={e => { e.currentTarget.style.color = '#8A6A5A'; e.currentTarget.style.gap = '8px' }}
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -39,15 +39,15 @@ export default function CaseStudyHero({ study }) {
           style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 28 }}
         >
           <span style={{
-            background: 'rgba(194,98,45,0.08)', border: '1px solid rgba(194,98,45,0.22)',
+            background: 'rgba(255,133,0,0.08)', border: '1px solid rgba(255,133,0,0.22)',
             borderRadius: 99, padding: '5px 14px',
             fontSize: 11, fontWeight: 600, letterSpacing: 1.4,
-            textTransform: 'uppercase', color: '#C2622D',
+            textTransform: 'uppercase', color: '#FF8500',
           }}>
             {study.industry}
           </span>
           <span style={{
-            background: 'rgba(194,98,45,0.04)', border: '1px solid rgba(194,98,45,0.10)',
+            background: 'rgba(255,133,0,0.04)', border: '1px solid rgba(255,133,0,0.10)',
             borderRadius: 99, padding: '5px 14px',
             fontSize: 11, fontWeight: 500, color: '#8A6A5A',
           }}>
@@ -61,9 +61,9 @@ export default function CaseStudyHero({ study }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22,1,0.36,1] }}
           style={{
-            fontFamily: "'Instrument Serif', serif",
+            fontFamily: "'Onest', sans-serif",
             fontSize: 'clamp(34px,5.5vw,76px)',
-            fontWeight: 400,
+            fontWeight: 800,
             letterSpacing: '-0.03em',
             lineHeight: 1.02,
             color: '#1A0F0A',
@@ -110,10 +110,10 @@ export default function CaseStudyHero({ study }) {
             {study.metrics.map((m, i) => (
               <div key={i} style={{ padding: '22px 24px', background: 'var(--bg-card)' }}>
                 <div style={{
-                  fontFamily: "'Instrument Serif', serif",
+                  fontFamily: "'Onest', sans-serif",
                   fontSize: 'clamp(26px,3vw,40px)',
-                  fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1,
-                  color: '#C2622D', marginBottom: 6,
+                  fontWeight: 800, letterSpacing: '-0.02em', lineHeight: 1,
+                  color: '#FF8500', marginBottom: 6,
                 }}>{m.value}</div>
                 <div style={{ fontSize: 12, color: '#5C3D2A', lineHeight: 1.4 }}>{m.label}</div>
               </div>
