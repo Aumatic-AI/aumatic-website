@@ -1,6 +1,3 @@
-// Converted from blogs.ts to the structure used by caseStudies.js
-// Source fields are preserved; compatibility fields are derived where
-// the existing case-study components require them.
 
 export const caseStudies = [
   {
@@ -11,25 +8,39 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "August 28, 2026",
+    updatedAt: "2026-08-28",
     tags: ["Case Study"],
+    category: "AI ADS + SOCIAL + OUTREACH PLATFORM",
+
+    seo: {
+      title: "AI Marketing Automation Platform | Kinetix Case Study",
+      description:
+        "How Kinetix automated AI ad creation, testing, performance tracking, and budget allocation in one marketing platform.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/kinetix-marketing-automation-platform.webp",
       "/images/case-studies/kinetix-hero.webp",
     ],
+
     summary:
       "Kinetix replaced the agency production pipeline with AI-generated ads, ran them against each other from day one, and shifted spend toward the winner automatically, with paid ads, organic social, and outreach all running from one platform.",
+
     metrics: [
       {
         value: "ONE AGENCY AD'S BUDGET NOW TESTS MANY IN A DAY",
         label: "AI ADS + SOCIAL + OUTREACH PLATFORM",
       },
     ],
+
     description:
       "Organic content builds authority, but it builds it slowly; there is no way to create demand on a Tuesday because the quarter needs it. Paid advertising is the fast lane, and it was closed, because producing an ad meant weeks of agency time and thousands of rupees for a single creative that may or may not work. Kinetix removes that bottleneck entirely. Ads, script, voice, image and video, are generated from a brief in minutes, launched as a set of competing variations, measured live, and then funded according to results, with spend moving automatically toward whatever is winning. Paid ads, organic social and cold outreach all run from the same platform, off the same brand and business context.",
-    category: "AI ADS + SOCIAL + OUTREACH PLATFORM",
+
     metricsLabel: "ONE AGENCY AD'S BUDGET NOW TESTS MANY IN A DAY",
+
     sections: [
       {
         type: "challenge",
@@ -88,25 +99,39 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "August 28, 2026",
+    updatedAt: "2026-08-28",
     tags: ["Case Study"],
+    category: "INTERNAL WHATSAPP OPERATIONS SYSTEM",
+
+    seo: {
+      title: "WhatsApp Automation for Pharma | Case Study",
+      description:
+        "See how a pharmaceutical distributor automated supplier, sales, and customer follow-ups through one WhatsApp operations system.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/pharma-whatsapp-operations-system.webp",
       "/images/case-studies/pharma-operations-hero.webp",
     ],
+
     summary:
       "A pharmaceutical distributor replaced hundreds of manual follow-ups a month with a single WhatsApp number that chases suppliers, checks in with the field team, and re-opens quiet customers on its own, with every reply routed to the one person who owns it.",
+
     metrics: [
       {
         value: "3 AUTOMATED FOLLOW-UP LOOPS · 20+ USERS · 1 NUMBER",
         label: "INTERNAL WHATSAPP OPERATIONS SYSTEM",
       },
     ],
+
     description:
       "In pharma distribution, the work that decides the month is follow-up work: asking a supplier whether a fast-moving product is available and at what price, asking a field salesperson what customers are actually demanding, asking a customer why they have gone quiet. It is simple work that never gets done consistently, because it depends on someone remembering. This system does the remembering. One business WhatsApp number reaches out on a schedule and on triggers from live stock data, and every reply that comes back is sorted and delivered to exactly the right person, procurement, sales, director or owner, inside one shared dashboard where nobody sees anyone else's conversations.",
-    category: "INTERNAL WHATSAPP OPERATIONS SYSTEM",
+
     metricsLabel: "3 AUTOMATED FOLLOW-UP LOOPS · 20+ USERS · 1 NUMBER",
+
     sections: [
       {
         type: "challenge",
@@ -163,26 +188,40 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "August 28, 2026",
+    updatedAt: "2026-08-28",
     tags: ["Case Study"],
+    category: "WHATSAPP AI SALES & SUPPORT DASHBOARD",
+
+    seo: {
+      title: "WhatsApp AI Sales & Support Dashboard | Compass Case Study",
+      description:
+        "How Compass automated WhatsApp customer conversations with AI-powered replies, catalog knowledge, conversation tracking, and cost monitoring.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/compass-whatsapp-dashboard.webp",
       "/images/case-studies/compass-hero.webp",
     ],
+
     summary:
       "Compass turns a business WhatsApp number into a storefront that never sleeps: answering customers instantly from your real catalog, logging every conversation, and showing you exactly what it costs to run.",
+
     metrics: [
       {
         value: "INSTANT REPLIES, 24/7 · WITH COST PER CONVERSATION TRACKED",
         label: "WHATSAPP AI SALES & SUPPORT DASHBOARD",
       },
     ],
+
     description:
       "Most businesses already sell on WhatsApp, through a phone someone has to keep picking up. Compass is the dashboard that sits behind that number. It answers customers in seconds using your own catalog and policies, keeps a complete record of every chat in one place, lets you change how it speaks without touching code, and tracks the running cost of every conversation so the whole thing stays measurable instead of mysterious.",
-    category: "WHATSAPP AI SALES & SUPPORT DASHBOARD",
+
     metricsLabel:
       "INSTANT REPLIES, 24/7 · WITH COST PER CONVERSATION TRACKED",
+
     sections: [
       {
         type: "challenge",
@@ -234,29 +273,44 @@ export const caseStudies = [
   {
     slug: "atlas-outbound-operations-dashboard",
     image: "/images/case-studies/atlas-outbound-operations-dashboard.webp",
-    title: "Atlas: From a Raw Company List to Classified Replies, in One Dashboard",
+    title:
+      "Atlas: From a Raw Company List to Classified Replies, in One Dashboard",
     client: "Case Study",
     industry: "Case Study",
     date: "August 28, 2026",
+    updatedAt: "2026-08-28",
     tags: ["Case Study"],
+    category: "OUTBOUND OPERATIONS DASHBOARD",
+
+    seo: {
+      title: "Outbound Sales Automation Platform | Atlas Case Study",
+      description:
+        "How Atlas automated prospect discovery, email personalization, outbound campaigns, and reply classification in one dashboard.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/atlas-outbound-operations-dashboard.webp",
       "/images/case-studies/atlas-hero.webp",
     ],
+
     summary:
       "Atlas replaced a five-tool outbound workflow with a single dashboard: finding the right people at target companies, writing personalized emails at scale, sending them, and sorting every reply by intent automatically.",
+
     metrics: [
       {
         value: "A 5-TOOL WORKFLOW COLLAPSED INTO ONE SYSTEM",
         label: "OUTBOUND OPERATIONS DASHBOARD",
       },
     ],
+
     description:
       "Outbound usually means a chain of disconnected tools: a list somewhere, an enrichment tool somewhere else, a spreadsheet of AI-written emails, a sending platform, and an inbox nobody has time to read. Every handoff is a CSV export and a chance to email the wrong person twice. Atlas collapses that chain into one dashboard. Upload a list of target companies and it finds the decision-makers, verifies their email addresses, writes a personalized sequence for each one, pushes it live, and then reads every reply and sorts it by intent, so the team only ever looks at the conversations that are worth their time.",
-    category: "OUTBOUND OPERATIONS DASHBOARD",
+
     metricsLabel: "A 5-TOOL WORKFLOW COLLAPSED INTO ONE SYSTEM",
+
     sections: [
       {
         type: "challenge",
@@ -315,25 +369,39 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "November 06, 2025",
+    updatedAt: "2025-11-06",
     tags: ["Case Study"],
+    category: "SEO CONTENT AUTOMATION",
+
+    seo: {
+      title: "AI SEO Content Automation | Case Study",
+      description:
+        "How an AI-powered content system automated keyword research, SEO blog creation, image generation, and WordPress publishing.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/seo-blog-automation.webp",
       "https://res.cloudinary.com/ds10dzkpj/image/upload/v1762323483/seo_omnsuv.png",
     ],
+
     summary:
       "We built an AI-powered SEO content engine for a Canadian client: auto-researching keywords, writing SEO-optimized blogs, generating branded images, and publishing directly to WordPress.",
+
     metrics: [
       {
         value: "1-CLICK PUBLISHING • FULLY OPTIMIZED",
         label: "SEO CONTENT AUTOMATION",
       },
     ],
+
     description:
       "A Canada-based business needed a way to rank faster, publish more content, and dominate high-intent search keywords, without hiring writers or SEO experts. We automated their entire SEO content pipeline end-to-end.",
-    category: "SEO CONTENT AUTOMATION",
+
     metricsLabel: "1-CLICK PUBLISHING • FULLY OPTIMIZED",
+
     sections: [
       {
         type: "challenge",
@@ -389,25 +457,39 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "November 05, 2025",
+    updatedAt: "2025-11-05",
     tags: ["Case Study"],
+    category: "CREATIVE AUTOMATION",
+
+    seo: {
+      title: "AI Video Ad Creative Automation | Case Study",
+      description:
+        "How an AI-powered creative system turned product images into multiple video ad variations in hours instead of weeks.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/ai-video-ad-automation.webp",
       "https://res.cloudinary.com/ds10dzkpj/image/upload/v1762263083/repeatless/newyork_casestudy_h0knjf.png",
     ],
+
     summary:
       "We automated a New York ad-creative agency, turning product photos into high-end video ads in hours instead of weeks. No photoshoots. No studios. Just AI-powered creative production at scale.",
+
     metrics: [
       {
         value: "5 AD VARIANTS • 1-DAY PRODUCTION",
         label: "CREATIVE AUTOMATION",
       },
     ],
+
     description:
       "A New York creative agency needed to scale ad production without photography teams, studios, or long edit cycles. We built an AI system that turns a single product image into photorealistic scenes and fully-edited video ads, in hours, not weeks.",
-    category: "CREATIVE AUTOMATION",
+
     metricsLabel: "5 AD VARIANTS • 1-DAY PRODUCTION",
+
     sections: [
       {
         type: "challenge",
@@ -463,25 +545,39 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "October 13, 2025",
+    updatedAt: "2025-10-13",
     tags: ["Case Study"],
+    category: "EVENT OPS AUTOMATION",
+
+    seo: {
+      title: "QR Event Check-In Automation | Case Study",
+      description:
+        "How a custom QR attendance system automated event check-ins, duplicate prevention, database verification, and real-time attendance tracking.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/qr-event-attendance-automation.webp",
       "https://res.cloudinary.com/ds10dzkpj/image/upload/v1760339555/ticket_qr_cyff8c.png",
     ],
+
     summary:
       "Zero third-party fees: our QR system verifies attendees against your database, blocks duplicate scans, and updates attendance in real time.",
+
     metrics: [
       {
         value: "1-SCAN-ONLY • REAL-TIME UPDATE",
         label: "EVENT OPS AUTOMATION",
       },
     ],
+
     description:
       "We built a lean, secure event check-in system: unique QR codes per attendee, instant database verification, and one-scan-only gatekeeping to stop pass-arounds, without paying per-attendee platform fees.",
-    category: "EVENT OPS AUTOMATION",
+
     metricsLabel: "1-SCAN-ONLY • REAL-TIME UPDATE",
+
     sections: [
       {
         type: "challenge",
@@ -537,25 +633,39 @@ export const caseStudies = [
     client: "Case Study",
     industry: "Case Study",
     date: "October 04, 2025",
+    updatedAt: "2025-10-04",
     tags: ["Case Study"],
+    category: "SOCIAL COMMERCE SOLUTION",
+
+    seo: {
+      title: "Instagram DM & Comment Automation | Case Study",
+      description:
+        "How an AI-powered Instagram automation system turned comments and DMs into 24/7 sales conversations with automated intent routing and human handoff.",
+    },
+
     gradient: "linear-gradient(135deg,#CAFB00 0%,#111111 100%)",
     icon: "⚡",
+
     images: [
       "/images/case-studies/instagram-dm-comments-automation.webp",
       "https://res.cloudinary.com/ds10dzkpj/image/upload/v1759665534/repeatless/insta_dm_hpng0l.png",
     ],
+
     summary:
       "AI agent + n8n turned Instagram comments & DMs into 24/7 sales chats: 62% more replies and 41% more qualified leads.",
+
     metrics: [
       {
         value: "62% MORE REPLIES FROM COMMENTS",
         label: "SOCIAL COMMERCE SOLUTION",
       },
     ],
+
     description:
       "Brands needed faster, on-brand Instagram conversations. We delivered an AI agent that replies in comments, moves to DM, and converts interest into sales, compliantly and at scale.",
-    category: "SOCIAL COMMERCE SOLUTION",
+
     metricsLabel: "62% MORE REPLIES FROM COMMENTS",
+
     sections: [
       {
         type: "challenge",

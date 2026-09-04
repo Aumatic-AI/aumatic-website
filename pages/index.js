@@ -138,14 +138,74 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Aumatic.AI — AI Automation Agency</title>
-        <meta name="description" content="We build and deploy intelligent automation for your business. Save hundreds of hours every month with custom AI workflows." />
-        <link rel="icon" href="/aumatic_favicon.png" />
-        <meta property="og:title" content="Aumatic.AI — AI Automation Agency" />
-        <meta property="og:description" content="We build and deploy intelligent automation for your business." />
-        <meta property="og:type" content="website" />
-      </Head>
+  {/* Primary SEO */}
+  <title>Aumatic.AI | AI Automation Agency for Business Workflows</title>
 
+  <meta
+    name="description"
+    content="Aumatic.AI designs and deploys AI-powered business automation, workflows, AI agents, WhatsApp systems, and custom integrations that reduce manual work and save teams time."
+  />
+
+  <link rel="canonical" href="https://www.aumatic.ai/" />
+  <link rel="icon" href="/aumatic_favicon.png" />
+
+  {/* Open Graph — LinkedIn, WhatsApp, Facebook, etc. */}
+  <meta
+    property="og:title"
+    content="Aumatic.AI | AI Automation Agency for Business Workflows"
+  />
+
+  <meta
+    property="og:description"
+    content="AI-powered automation, workflows, agents, and custom business systems built around how your team actually works."
+  />
+
+  <meta
+    property="og:type"
+    content="website"
+  />
+
+  <meta
+    property="og:url"
+    content="https://www.aumatic.ai/"
+  />
+
+  <meta
+    property="og:site_name"
+    content="Aumatic.AI"
+  />
+
+  <meta
+    property="og:image"
+    content="https://www.aumatic.ai/aumatic-og.png"
+  />
+
+  <meta
+    property="og:image:alt"
+    content="Aumatic.AI — AI Automation Agency"
+  />
+
+  {/* Twitter / X */}
+  <meta
+    name="twitter:card"
+    content="summary_large_image"
+  />
+
+  <meta
+    name="twitter:title"
+    content="Aumatic.AI | AI Automation Agency for Business Workflows"
+  />
+
+  <meta
+    name="twitter:description"
+    content="AI-powered automation, workflows, agents, and custom business systems built around how your team actually works."
+  />
+
+  <meta
+    name="twitter:image"
+    content="https://www.aumatic.ai/aumatic-og.png"
+  />
+</Head>
       <AnimatePresence>{!loaded && <Intro onDone={() => setLoaded(true)} />}</AnimatePresence>
 
       {loaded && (

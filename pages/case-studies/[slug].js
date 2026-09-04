@@ -342,50 +342,85 @@ export default function CaseStudyPage({
 
   return (
     <>
-      {/* ==========================================================
-          HEAD
-      ========================================================== */}
+    <Head>
+  <title>
+    {study.seo?.title || `${study.title} | Aumatic.AI Case Study`}
+  </title>
 
-      <Head>
+  <meta
+    name="description"
+    content={study.seo?.description || study.summary}
+  />
 
-        <title>
-          {`${study.title} — Aumatic.AI`}
-        </title>
+  <link
+    rel="canonical"
+    href={`https://www.aumatic.ai/case-studies/${study.slug}`}
+  />
 
-        <meta
-          name="description"
-          content={
-            study.description ||
-            study.summary
-          }
-        />
+  <link rel="icon" href="/aumatic_favicon.png" />
 
-        <meta
-          property="og:title"
-          content={
-            `${study.title} — Aumatic.AI`
-          }
-        />
+  {/* Open Graph */}
+  <meta
+    property="og:title"
+    content={study.seo?.title || `${study.title} | Aumatic.AI Case Study`}
+  />
 
-        <meta
-          property="og:description"
-          content={
-            study.description ||
-            study.summary
-          }
-        />
+  <meta
+    property="og:description"
+    content={study.seo?.description || study.summary}
+  />
 
-        <meta
-          property="og:type"
-          content="article"
-        />
+  <meta property="og:type" content="article" />
 
-        <link
-          rel="icon"
-          href="/aumatic_favicon.png"
-        />
+  <meta
+    property="og:url"
+    content={`https://www.aumatic.ai/case-studies/${study.slug}`}
+  />
 
-      </Head>
+  <meta property="og:site_name" content="Aumatic.AI" />
+
+  {/* Twitter */}
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <meta
+    name="twitter:title"
+    content={study.seo?.title || `${study.title} | Aumatic.AI Case Study`}
+  />
+
+  <meta
+    name="twitter:description"
+    content={study.seo?.description || study.summary}
+  />
+  <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline:
+        study.seo?.title ||
+        `${study.title} | Aumatic.AI Case Study`,
+      description: study.seo?.description || study.summary,
+      url: `https://www.aumatic.ai/case-studies/${study.slug}`,
+      datePublished: study.date,
+      dateModified: study.updatedAt || study.date,
+      image: study.image
+        ? `https://www.aumatic.ai${study.image}`
+        : undefined,
+      author: {
+        "@type": "Organization",
+        name: "Aumatic.AI",
+        url: "https://www.aumatic.ai",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Aumatic.AI",
+        url: "https://www.aumatic.ai",
+      },
+    }),
+  }}
+/>
+</Head>
 
 
       {/* ==========================================================
