@@ -5,15 +5,20 @@ function generateSitemap() {
   const today = new Date().toISOString().slice(0, 10)
 
   const staticUrls = [
-    { loc: `${SITE_URL}/`, changefreq: 'weekly', priority: '1.0' },
+    {
+      loc: `${SITE_URL}/`,
+      lastmod: today,
+      changefreq: 'weekly',
+      priority: '1.0',
+    },
   ]
 
   const caseStudyUrls = caseStudies.map((study) => ({
-  loc: `${SITE_URL}/case-studies/${study.slug}`,
-  lastmod: study.updatedAt || study.date,
-  changefreq: 'monthly',
-  priority: '0.8',
-}))
+    loc: `${SITE_URL}/case-studies/${study.slug}`,
+    lastmod: study.updatedAt || study.date || today,
+    changefreq: 'monthly',
+    priority: '0.8',
+  }))
 
   const urls = [...staticUrls, ...caseStudyUrls]
 
@@ -21,7 +26,7 @@ function generateSitemap() {
     .map(
       (url) => `  <url>
     <loc>${url.loc}</loc>
-    <lastmod>${today}</lastmod>
+    <lastmod>${url.lastmod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`
@@ -39,7 +44,9 @@ export async function getServerSideProps({ res }) {
   res.write(generateSitemap())
   res.end()
 
-  return { props: {} }
+  return {
+    props: {},
+  }
 }
 
 export default function Sitemap() {
