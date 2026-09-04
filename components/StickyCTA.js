@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { BOOKING_LINK } from '../data/constants'
 
 export default function StickyCTA() {
   const [visible, setVisible] = useState(false)
@@ -115,7 +116,7 @@ export default function StickyCTA() {
 
           {/* CTA */}
           <a
-            href="https://cal.com/chandan-kumar-zhrofj/30min"
+            href={BOOKING_LINK}
             target="_blank"
             rel="noopener noreferrer"
             style={{

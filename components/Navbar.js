@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { motion, AnimatePresence } from 'framer-motion'
+import { BOOKING_LINK } from '../data/constants'
 
 const NAV_LINKS = [
   { label: 'Process', hash: 'process' },
@@ -130,7 +131,7 @@ export default function Navbar() {
           <div className="navbar-right">
 
             <a
-              href="https://cal.com/chandan-kumar-zhrofj/30min"
+              href={BOOKING_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="navbar-cta"
@@ -239,7 +240,7 @@ export default function Navbar() {
 
 
             <motion.a
-              href="https://cal.com/chandan-kumar-zhrofj/30min"
+              href={BOOKING_LINK}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}

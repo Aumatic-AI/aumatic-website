@@ -7,6 +7,7 @@ import {
   useSpring,
   useReducedMotion,
 } from 'framer-motion'
+import { BOOKING_LINK } from '../data/constants'
 
 export default function Hero() {
   const ref = useRef(null)
@@ -175,7 +176,7 @@ export default function Hero() {
               {/* PRIMARY CTA */}
 
               <a
-                href="https://cal.com/chandan-kumar-zhrofj/30min"
+                href={BOOKING_LINK}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero-primary-cta"

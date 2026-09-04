@@ -9,6 +9,7 @@ import CaseStudySection from '../../components/CaseStudySection'
 import CaseStudyImage from '../../components/CaseStudyImage'
 import WhatsAppFloat from '../../components/WhatsAppFloat'
 import { caseStudies } from '../../data/caseStudies'
+import { BOOKING_LINK } from '../../data/constants'
 
 
 /* ================================================================
@@ -560,7 +561,7 @@ export default function CaseStudyPage({
 
 
                 <a
-                  href="https://cal.com/chandan-kumar-zhrofj/30min"
+                  href={BOOKING_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cta-button"

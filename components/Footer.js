@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { motion } from 'framer-motion'
+import { BOOKING_LINK } from '../data/constants'
 
 const COLS = [
   {
@@ -27,7 +28,7 @@ const COLS = [
     links: [
       {
         label: 'Book a Call',
-        href: 'https://cal.com/chandan-kumar-zhrofj/30min',
+        href: BOOKING_LINK,
       },
       {
         label: 'WhatsApp',
@@ -168,7 +169,7 @@ export default function Footer() {
             </p>
 
             <a
-              href="https://cal.com/chandan-kumar-zhrofj/30min"
+              href={BOOKING_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="footer-cta-link"

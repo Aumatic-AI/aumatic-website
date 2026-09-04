@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { BOOKING_LINK } from '../data/constants'
 
 const PERKS = [
   {
@@ -178,7 +179,7 @@ export default function Contact() {
               <div className="direct-links">
 
                 <a
-                  href="https://cal.com/chandan-kumar-zhrofj/30min"
+                  href={BOOKING_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="direct-link"

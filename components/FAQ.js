@@ -4,6 +4,7 @@ import {
   AnimatePresence,
   useInView,
 } from 'framer-motion'
+import { BOOKING_LINK } from '../data/constants'
 
 const FAQS = [
   {
@@ -365,7 +366,7 @@ export default function FAQ() {
             {/* Simple CTA */}
 
             <a
-              href="https://cal.com/chandan-kumar-zhrofj/30min"
+              href={BOOKING_LINK}
               target="_blank"
               rel="noopener noreferrer"
               className="faq-cta"
