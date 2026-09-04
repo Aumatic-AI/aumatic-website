@@ -318,17 +318,7 @@ export default function CaseStudyPage({
           })
 
 
-          if (
-            index === 1 &&
-            images.length > 1
-          ) {
-            accumulator.push({
-              kind: 'image',
-              label: 'System Overview',
-              src: images[1],
-            })
-          }
-
+          
 
           if (
             index === 2 &&
@@ -436,7 +426,7 @@ export default function CaseStudyPage({
             <section className="lead-image-section">
 
               <CaseStudyImage
-                label="Workflow Architecture"
+                
                 src={images[0]}
               />
 
